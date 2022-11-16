@@ -20,6 +20,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashborad');
     Route::resource('users', App\Http\Controllers\UserController::class);
+    Route::post('users/{user}/change-password', [App\Http\Controllers\UserController::class, 'changePassword'])->name('users.changePassword');
     Route::get('data', [App\Http\Controllers\UserController::class, 'data'])->name('users.data');
 });
 

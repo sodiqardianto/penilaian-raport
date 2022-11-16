@@ -22,7 +22,7 @@
 
             <!-- Row -->
             <div class="row">
-                <div class="col-xl-8 col-lg-12">
+                <div class="col-lg-8">
                     <form action="{{ route('users.update', $user->id) }}" method="POST">
                         @csrf
                         @method('PUT')
@@ -61,20 +61,6 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
-                                <div class="form-group">
-                                    <label class="form-label">Password</label>
-                                    <input type="password" name="password" class="form-control @error('password') is-invalid state-invalid @enderror" placeholder="Password">
-                                    @error('password')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Confirm Password</label>
-                                    <input type="password" name="password_confirmation" class="form-control @error('password_confirmation') is-invalid state-invalid @enderror" placeholder="Confirm Password">
-                                    @error('password_confirmation')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
                             </div>
                             <div class="card-footer text-end">
                                 <button type="submit" class="btn btn-warning"><i class="fa fa-plus"></i> Perbarui</button>
@@ -83,9 +69,54 @@
                         </div>
                     </form>
                 </div>
+                <div class="col-lg-4">
+                    <form action="{{ route('users.changePassword', $user->id) }}" method="POST">
+                        @csrf
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="panel-group1" id="accordion1">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading1 ">
+                                            <h4 class="panel-title1">
+                                                <a class="accordion-toggle collapsed" data-bs-toggle="collapse" data-bs-parent="#accordion" href="#collapseFour" aria-expanded="false">Ganti Password</a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-expanded="false">
+                                            <div class="panel-body">
+                                                <div class="form-group">
+                                                    <label class="form-label">Current Password</label>
+                                                    <input type="password" name="current_password" class="form-control @error('current_password') is-invalid state-invalid @enderror" placeholder="Current Password">
+                                                    @error('current_password')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="form-label">New Password</label>
+                                                    <input type="password" name="new_password" class="form-control @error('new_password') is-invalid state-invalid @enderror" placeholder="Confirm Password">
+                                                    @error('new_password')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="form-label">Confirm New Password</label>
+                                                    <input type="password" name="conf_new_password" class="form-control @error('conf_new_password') is-invalid state-invalid @enderror" placeholder="Confirm Password">
+                                                    @error('conf_new_password')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                                <div class="text-end">
+                                                    <button type="submit" class="btn btn-primary"><i class="fa fa-unlock-alt"></i> Ganti Password</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
             <!-- End Row -->
-
         </div>
         <!-- CONTAINER CLOSED -->
     </div>

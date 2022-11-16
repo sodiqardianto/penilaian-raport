@@ -103,7 +103,6 @@ class UserController extends Controller
             'name' => 'required',
             'username' => 'required|unique:users,username,' . $user->id,
             'email' => 'required|email|unique:users,email,' . $user->id,
-            'password' => 'nullable|min:6|confirmed'
         ));
 
         $user->update([
@@ -111,7 +110,6 @@ class UserController extends Controller
             'username' => $request->username,
             'email' => $request->email,
             'status' => $request->status,
-            'password' => Hash::make($request->password)
         ]);
 
         if ($user) {
@@ -130,5 +128,28 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function changePassword(Request $request, User $user)
+    {
+        if (!Hash::check($request->current_password, $user->password)) {
+            return redirect()->back()->with('error', 'Current password salah');
+        } else {
+            $request->validate([
+                'current_password' => 'required',
+                'new_password' => 'required|min:6',
+                'conf_new_password' => 'required|same:new_password',
+            ]);
+
+            $user->update([
+                'password' => Hash::make($request->new_password)
+            ]);
+
+            if ($user) {
+                return redirect()->route('users.index')->with('success', 'Password berhasil diubah');
+            } else {
+                return redirect()->route('users.edit', $user->id)->with('error', 'Password gagal diubah');
+            }
+        }
     }
 }

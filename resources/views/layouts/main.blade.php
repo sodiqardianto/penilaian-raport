@@ -174,11 +174,13 @@
             notif({
                 msg: "{{ session('success') }}",
                 type: "success",
+                opacity: 0.8
             })
         @elseif(session()->has('error'))
             notif({
                 msg: "{{ session('error') }}",
-                type: "success",
+                type: "error",
+                opacity: 0.8
             })
         @endif
     </script>
