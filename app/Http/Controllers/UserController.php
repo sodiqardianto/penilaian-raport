@@ -9,13 +9,27 @@ use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:create-user', ['only' => ['create', 'store']]);
+        $this->middleware('permission:view-user', ['only' => ['index']]);
+        $this->middleware('permission:edit-user', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:delete-user', ['only' => ['destroy']]);
+    }
+
     public function data()
     {
         $user = User::all();
         return DataTables::of($user)
             ->addIndexColumn()
             ->addColumn('action', function ($user) {
-                return '<a href="' . route('users.edit', $user->id) . '" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i> Ubah</a>';
+                if ($user->id == 1) {
+                    $delete = '<button data-id="' . $user->id . '" class="btn btn-danger btn-sm delete" hidden><i class="fa fa-trash"></i> Delete</button>';
+                } else {
+                    $delete = '<button data-id="' . $user->id . '" class="btn btn-danger btn-sm delete"><i class="fa fa-trash"></i> Delete</button>';
+                }
+                $edit = '<a href="' . route('users.edit', $user->id) . '" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i> Ubah</a>';
+                return $edit . ' ' . $delete;
             })->make(true);
     }
 
@@ -113,9 +127,9 @@ class UserController extends Controller
         ]);
 
         if ($user) {
-            return redirect()->route('users.index')->with('success', 'User berhasil diubah');
+            return redirect()->route('users.index')->with('success', 'User berhasil diperbarui');
         } else {
-            return redirect()->route('users.edit', $user->id)->with('error', 'User gagal diubah');
+            return redirect()->route('users.index')->with('error', 'User gagal diperbarui');
         }
     }
 
@@ -125,9 +139,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return response()->json(['success' => 'User berhasil dihapus']);
     }
 
     public function changePassword(Request $request, User $user)

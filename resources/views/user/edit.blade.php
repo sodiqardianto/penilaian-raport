@@ -51,7 +51,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Status</label>
-                                    <select name="status" class="form-control form-select">
+                                    <select name="status" class="form-control form-select select2">
                                         <option value="" selected disabled>-- Pilih Status --</option>
                                         <option value="1" {{ old('status', $user->status) == 1 ? 'selected' : '' }}>Aktif</option>
                                         <option value="0" {{ old('status', $user->status) == 0 ? 'selected' : '' }}>Tidak Aktif</option>

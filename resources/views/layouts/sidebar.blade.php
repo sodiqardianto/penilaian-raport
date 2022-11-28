@@ -29,8 +29,8 @@
                 <li class="sub-category">
                     <h3>Management User</h3>
                 </li>
-                <li class="slide @if (Request::segment(1) == 'users') is-expanded @endif">
-                    <a class="side-menu__item @if (Request::segment(1) == 'users') active is-expanded @endif" data-bs-toggle="slide" href="javascript:void(0)">
+                <li class="slide @if (Request::segment(1) == 'users' || Request::segment(1) == 'roles' || Request::segment(1) == 'permissions') is-expanded @endif">
+                    <a class="side-menu__item @if (Request::segment(1) == 'users' || Request::segment(1) == 'roles' || Request::segment(1) == 'permissions') active is-expanded @endif" data-bs-toggle="slide" href="javascript:void(0)">
                         <i class="side-menu__icon fe fe-slack"></i>
                         <span class="side-menu__label">Management User</span>
                         <i class="angle fe fe-chevron-right"></i>
@@ -40,10 +40,13 @@
                             <a href="javascript:void(0)">Management User</a>
                         </li>
                         <li>
-                            <a href="{{ route('users.index') }}" class="slide-item active"> User</a>
+                            <a href="{{ route('users.index') }}" class="slide-item @if (Request::segment(1) == 'users') active @endif"> User</a>
                         </li>
                         <li>
-                            <a href="#" class="slide-item"> Role</a>
+                            <a href="{{ route('roles.index') }}" class="slide-item @if (Request::segment(1) == 'roles') active @endif"> Role</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('permissions.index') }}" class="slide-item @if (Request::segment(1) == 'permissions') active @endif"> Permission</a>
                         </li>
                     </ul>
                 </li>

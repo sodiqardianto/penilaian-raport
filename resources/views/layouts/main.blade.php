@@ -4,6 +4,7 @@
 <head>
 
     <!-- META DATA -->
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <meta charset="UTF-8">
     <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -125,9 +126,6 @@
     <script src="{{ asset('assets/plugins/chart/rounded-barchart.js') }}"></script>
     <script src="{{ asset('assets/plugins/chart/utils.js') }}"></script>
 
-    <!-- INTERNAL SELECT2 JS -->
-    <script src="{{ asset('assets/plugins/select2/select2.full.min.js') }}"></script>
-
     <!-- INTERNAL Data tables js-->
     <script src="{{ asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/datatable/js/dataTables.bootstrap5.js') }}"></script>
@@ -144,6 +142,10 @@
     <!-- CHART-DONUT JS -->
     <script src="{{ asset('assets/js/charts.js') }}"></script>
 
+    <!-- SWEET-ALERT JS -->
+    {{-- <script src="{{ asset('assets/plugins/sweet-alert/sweetalert.min.js') }}"></script>
+    <script src="{{ asset('assets/js/sweet-alert.js') }}"></script> --}}
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- INTERNAL Flot JS -->
     {{-- <script src="{{ asset('assets/plugins/flot/jquery.flot.js') }}"></script>
     <script src="{{ asset('assets/plugins/flot/jquery.flot.fillbetween.js') }}"></script>
@@ -170,19 +172,22 @@
     <script src="{{ asset('assets/js/custom.js') }}"></script>
 
     <script>
-        @if(session()->has('success'))
-            notif({
-                msg: "{{ session('success') }}",
-                type: "success",
-                opacity: 0.8
-            })
-        @elseif(session()->has('error'))
-            notif({
-                msg: "{{ session('error') }}",
-                type: "error",
-                opacity: 0.8
-            })
-        @endif
+    @if(session()->has('success'))
+        notif({
+            msg: "{{ session('success') }}",
+            type: "success",
+        })
+    @elseif(session()->has('error'))
+        notif({
+            msg: "{{ session('error') }}",
+            type: "error",
+        })
+    @endif
+
+    $('.select2').select2({
+        minimumResultsForSearch: Infinity,
+        width: '100%'
+    });
     </script>
     
     @stack('after-script')
