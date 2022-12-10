@@ -32,6 +32,18 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('permissions', App\Http\Controllers\PermissionController::class);
     Route::get('dataPermission', [App\Http\Controllers\PermissionController::class, 'data'])->name('permissions.data');
+
+    Route::resource('murid', App\Http\Controllers\MuridController::class);
+    Route::get('datamurid', [App\Http\Controllers\MuridController::class, 'data'])->name('murid.data');
+
+    Route::resource('guru', App\Http\Controllers\GuruController::class);
+    Route::get('dataguru', [App\Http\Controllers\GuruController::class, 'data'])->name('guru.data');
+
+    Route::resource('pelajaran', App\Http\Controllers\PelajaranController::class);
+    Route::get('datapelajaran', [App\Http\Controllers\PelajaranController::class, 'data'])->name('pelajaran.data');
+
+    Route::resource('semester', App\Http\Controllers\SemesterController::class);
+    Route::get('datasemester', [App\Http\Controllers\SemesterController::class, 'data'])->name('semester.data');
 });
 
 // Auth::routes();
