@@ -56,28 +56,24 @@
                 <li class="slide">
                     <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
                         <i class="side-menu__icon fe fe-slack"></i>
-                        <span class="side-menu__label">Apps</span>
+                        <span class="side-menu__label">Menu Master</span>
                         <i class="angle fe fe-chevron-right"></i>
                     </a>
                     <ul class="slide-menu">
-                        <li class="side-menu-label1">
-                            <a href="javascript:void(0)">Apps</a>
+                        <li>
+                            <a href="{{ route('murid.index') }}" class="slide-item @if (Request::segment(1) == 'murid') active @endif"> Murid</a>
                         </li>
                         <li>
-                            <a href="cards.html" class="slide-item"> Cards design</a>
+                            <a href="{{ route('guru.index') }}" class="slide-item @if (Request::segment(1) == 'guru') active @endif"> Guru</a>
                         </li>
                         <li>
-                            <a href="calendar.html" class="slide-item"> Default calendar</a>
+                            <a href="{{ route('pelajaran.index') }}" class="slide-item @if (Request::segment(1) == 'pelajaran') active @endif"> Pelajaran</a>
                         </li>
                         <li>
-                            <a href="calendar2.html" class="slide-item"> Full calendar</a>
+                            <a href="{{ route('semester.index') }}" class="slide-item @if (Request::segment(1) == 'semester') active @endif"> Semester</a>
+
                         </li>
-                        <li>
-                            <a href="chat.html" class="slide-item"> Chat</a>
-                        </li>
-                        <li>
-                            <a href="notify.html" class="slide-item"> Notifications</a>
-                        </li>
+                        
                     </ul>
                 </li>
                 <li class="slide">
