@@ -8,6 +8,14 @@ use Yajra\DataTables\Facades\DataTables;
 
 class MuridController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:create-murid', ['only' => ['create', 'store']]);
+        $this->middleware('permission:view-murid', ['only' => ['index']]);
+        $this->middleware('permission:edit-murid', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:delete-murid', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -68,9 +76,9 @@ class MuridController extends Controller
         ));
 
         $murid = Murid::create([
-            'namamurid'=>$request->name,
-            'notelp'=>$request->notelp,
-            'jeniskelamin'=>$request->jk
+            'namamurid' => $request->name,
+            'notelp' => $request->notelp,
+            'jeniskelamin' => $request->jk
         ]);
 
         if ($murid) {
@@ -116,7 +124,7 @@ class MuridController extends Controller
             'notelp' => 'required',
             'jk' => 'required'
         ]);
-    
+
         $data = Murid::findOrFail($murid->id);
         $data->namamurid = $validatedData['name'];
         $data->notelp = $validatedData['notelp'];
@@ -140,7 +148,7 @@ class MuridController extends Controller
     {
         //$muriddata = User::findOrFail($murid->id);
         $murid->delete();
-        
+
         return response()->json(['success' => 'Data Murid Berhasil Dihapus']);
     }
 }

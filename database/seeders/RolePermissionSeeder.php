@@ -31,6 +31,26 @@ class RolePermissionSeeder extends Seeder
         Permission::create(['name' => 'edit-user']);
         Permission::create(['name' => 'delete-user']);
 
+        Permission::create(['name' => 'create-murid']);
+        Permission::create(['name' => 'view-murid']);
+        Permission::create(['name' => 'edit-murid']);
+        Permission::create(['name' => 'delete-murid']);
+
+        Permission::create(['name' => 'create-guru']);
+        Permission::create(['name' => 'view-guru']);
+        Permission::create(['name' => 'edit-guru']);
+        Permission::create(['name' => 'delete-guru']);
+
+        Permission::create(['name' => 'create-pelajaran']);
+        Permission::create(['name' => 'view-pelajaran']);
+        Permission::create(['name' => 'edit-pelajaran']);
+        Permission::create(['name' => 'delete-pelajaran']);
+
+        Permission::create(['name' => 'create-semester']);
+        Permission::create(['name' => 'view-semester']);
+        Permission::create(['name' => 'edit-semester']);
+        Permission::create(['name' => 'delete-semester']);
+
         $role_admin = Role::create([
             'name' => 'admin',
             'guard_name' => 'web'
@@ -52,6 +72,27 @@ class RolePermissionSeeder extends Seeder
             'view-user',
             'edit-user',
             'delete-user',
+
+            'create-murid',
+            'view-murid',
+            'edit-murid',
+            'delete-murid',
+
+            'create-guru',
+            'view-guru',
+            'edit-guru',
+            'delete-guru',
+
+            'create-pelajaran',
+            'view-pelajaran',
+            'edit-pelajaran',
+            'delete-pelajaran',
+
+            'create-semester',
+            'view-semester',
+            'edit-semester',
+            'delete-semester',
+
         ]);
     }
 }

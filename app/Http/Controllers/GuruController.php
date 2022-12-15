@@ -8,6 +8,14 @@ use Yajra\DataTables\Facades\DataTables;
 
 class GuruController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:create-guru', ['only' => ['create', 'store']]);
+        $this->middleware('permission:view-guru', ['only' => ['index']]);
+        $this->middleware('permission:edit-guru', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:delete-guru', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -60,7 +68,7 @@ class GuruController extends Controller
         ]);
 
         // Membuat record baru di table guru
-        $data=Guru::create([
+        $data = Guru::create([
             'namaguru' => $request->namaguru,
             'notelp' => $request->notelp,
         ]);
@@ -122,7 +130,6 @@ class GuruController extends Controller
         } else {
             return redirect()->route('guru.create')->with('error', 'Data Guru Gagal Diubah');
         }
-
     }
 
     /**

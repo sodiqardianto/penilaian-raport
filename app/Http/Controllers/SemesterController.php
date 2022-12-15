@@ -8,6 +8,15 @@ use Yajra\DataTables\Facades\DataTables;
 
 class SemesterController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:create-semester', ['only' => ['create', 'store']]);
+        $this->middleware('permission:view-semester', ['only' => ['index']]);
+        $this->middleware('permission:edit-semester', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:delete-semester', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -29,9 +38,9 @@ class SemesterController extends Controller
             })
             ->addColumn('semesterstr', function ($semester) {
                 if ($semester->semester == '1') {
-                    $data = 'Semester 1';
+                    $data = 'Ganjil';
                 } else {
-                    $data = 'Semester 2';
+                    $data = 'Genap';
                 }
                 return $data;
             })
@@ -142,6 +151,6 @@ class SemesterController extends Controller
     public function destroy(Semester $semester)
     {
         $semester->delete();
-         return response()->json(['success' => 'Data Semester Berhasil Dihapus']);
+        return response()->json(['success' => 'Data Semester Berhasil Dihapus']);
     }
 }

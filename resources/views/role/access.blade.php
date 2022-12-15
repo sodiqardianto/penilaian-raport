@@ -61,7 +61,7 @@
                                         </div>
                                     </div>
                                     <div class="card-footer text-end">
-                                        <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah</button>
+                                        <button type="submit" class="btn btn-primary"><i class="fa fa-key"></i> Perbaru Akses</button>
                                         <a href="{{ route('roles.index') }}" class="btn btn-default"><i class="fa fa-chevron-left"></i> Kembali</a>
                                     </div>
                                 </div>

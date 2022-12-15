@@ -82,10 +82,6 @@
                 data: 'tahun',
                 name: 'tahun'
             },
-            // {
-            //     data: 'jeniskelaminstr',
-            //     name: 'jeniskelaminstr'
-            // },
             {
                 data: 'action',
                 name: 'action',

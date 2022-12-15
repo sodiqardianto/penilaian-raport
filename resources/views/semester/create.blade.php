@@ -30,8 +30,8 @@
                                 <div class="form-group">
                                     <label class="form-label">Semester</label>
                                     <select name="semester" class="form-control form-select select2 select2-hidden-accessible @error('semester') is-invalid state-invalid @enderror" data-bs-placeholder="Pilih Semester" tabindex="-1" aria-hidden="true">
-                                        <option value="1">Semester 1</option> 
-                                        <option value="2">Semester 2</option> 
+                                        <option value="1">Ganjil</option> 
+                                        <option value="2">Genap</option> 
                                     </select> 
                                     @error('semester')
                                     <div class="invalid-feedback">{{ $message }}</div>

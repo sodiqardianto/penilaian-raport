@@ -53,8 +53,8 @@
                 <li class="sub-category">
                     <h3>UI Kit</h3>
                 </li>
-                <li class="slide">
-                    <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
+                <li class="slide @if (Request::segment(1) == 'murid' || Request::segment(1) == 'guru' || Request::segment(1) == 'pelajaran' || Request::segment(1) == 'semester') is-expanded @endif">
+                    <a class="side-menu__item @if (Request::segment(1) == 'murid' || Request::segment(1) == 'guru' || Request::segment(1) == 'pelajaran' || Request::segment(1) == 'semester') active @endif" data-bs-toggle="slide" href="javascript:void(0)">
                         <i class="side-menu__icon fe fe-slack"></i>
                         <span class="side-menu__label">Menu Master</span>
                         <i class="angle fe fe-chevron-right"></i>

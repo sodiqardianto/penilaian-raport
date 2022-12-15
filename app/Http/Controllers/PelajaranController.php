@@ -9,6 +9,14 @@ use Yajra\DataTables\Facades\DataTables;
 
 class PelajaranController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:create-pelajaran', ['only' => ['create', 'store']]);
+        $this->middleware('permission:view-pelajaran', ['only' => ['index']]);
+        $this->middleware('permission:edit-pelajaran', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:delete-pelajaran', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -103,7 +111,7 @@ class PelajaranController extends Controller
     public function update(Request $request, Pelajaran $pelajaran)
     {
         // Mencari record pelajaran berdasarkan ID yang diberikan
-        $data = Pelajaran::findOrFail($id);
+        $data = Pelajaran::findOrFail($pelajaran->id);
 
         // Validasi data yang dikirim
         $this->validate($request, [
@@ -130,12 +138,11 @@ class PelajaranController extends Controller
      */
     public function destroy(Pelajaran $pelajaran)
     {
-         // Mencari record pelajaran berdasarkan ID yang diberikan
-         //$data = Pelajaran::findOrFail($pelajaran->id);
+        // Mencari record pelajaran berdasarkan ID yang diberikan
+        //$data = Pelajaran::findOrFail($pelajaran->id);
 
-         // Menghapus data pelajaran
-         $pelajaran->delete();
-         return response()->json(['success' => 'Data Pelajaran Berhasil Dihapus']);
-        
+        // Menghapus data pelajaran
+        $pelajaran->delete();
+        return response()->json(['success' => 'Data Pelajaran Berhasil Dihapus']);
     }
 }
