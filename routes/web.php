@@ -44,6 +44,15 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('semester', App\Http\Controllers\SemesterController::class);
     Route::get('datasemester', [App\Http\Controllers\SemesterController::class, 'data'])->name('semester.data');
+    
+    Route::resource('kelas', App\Http\Controllers\KelasController::class);
+    Route::get('datakelas', [App\Http\Controllers\KelasController::class, 'data'])->name('kelas.data');
+    
+    Route::resource('walikelas', App\Http\Controllers\WalikelasController::class);
+    Route::get('datawalikelas', [App\Http\Controllers\WalikelasController::class, 'data'])->name('walikelas.data');
+
+    Route::resource('kelasmurid', App\Http\Controllers\KelasmuridController::class);
+    Route::get('datakelasmurid', [App\Http\Controllers\KelasmuridController::class, 'data'])->name('kelasmurid.data');
 });
 
 // Auth::routes();

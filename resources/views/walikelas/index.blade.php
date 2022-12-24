@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'Guru')
+@section('title', 'Wali Kelas')
 @section('content')
 <!--app-content open-->
 <div class="main-content app-content mt-0">
@@ -25,7 +25,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">
-                                <a href="{{ route('guru.create') }}" class="btn btn-primary"><i class="fe fe-plus me-2"></i> Tambah Guru</a>
+                                <a href="{{ route('walikelas.create') }}" class="btn btn-primary"><i class="fe fe-plus me-2"></i> Tambah Wali Kelas</a>
                             </h3>
                         </div>
                         <div class="card-body">
@@ -34,10 +34,8 @@
                                     <thead>
                                         <tr>
                                             <th class="border-bottom-0">No</th>
+                                            <th class="border-bottom-0">Kelas</th>
                                             <th class="border-bottom-0">Nama Guru</th>
-                                            <th class="border-bottom-0">No Telepon</th>
-                                            {{-- <th class="border-bottom-0">Jenis Kelamin</th> --}}
-                                            {{-- <th class="border-bottom-0">Status</th> --}}
                                             <th class="border-bottom-0">Aksi</th>
                                         </tr>
                                     </thead>
@@ -65,7 +63,7 @@
             searchPlaceholder: "Cari ..."
         },
         ajax: {
-            url: "{{ route('guru.data') }}",
+            url: "{{ route('walikelas.data') }}",
             type: "GET",
         },
         columns: [{
@@ -75,17 +73,13 @@
                 searchable: false
             },
             {
+                data: 'kelas',
+                name: 'kelas'
+            },
+            {
                 data: 'namaguru',
                 name: 'namaguru'
             },
-            {
-                data: 'notelp',
-                name: 'notelp'
-            },
-            // {
-            //     data: 'jeniskelaminstr',
-            //     name: 'jeniskelaminstr'
-            // },
             {
                 data: 'action',
                 name: 'action',
@@ -102,9 +96,9 @@
     $(document).on("click", ".delete", function(e) {
         var id = $(this).attr('data-id');
         Swal.fire({
-            title: "Hapus Guru?",
+            title: "Hapus Wali Kelas?",
             icon: 'error',
-            text: "Apakah kamu ingin menghapus guru! ",
+            text: "Apakah kamu ingin menghapus wali kelas! ",
             showCancelButton: !0,
             confirmButtonText: "Hapus",
             cancelButtonText: "Cancel",
@@ -112,7 +106,7 @@
         }).then(function (e) {
             if (e.value === true) {
                 $.ajax({
-                    url: "{{url('/guru')}}/" + id,
+                    url: "{{url('/walikelas')}}/" + id,
                     type: 'DELETE',
                     data: {
                         _token: "{{ csrf_token() }}",
@@ -122,7 +116,7 @@
                     success: function (data) {
                         Swal.fire({
                             title: "Berhasil!",
-                            text: "Guru berhasil dihapus!",
+                            text: "Wali Kelas berhasil dihapus!",
                             icon: "success",
                             confirmButtonText: "Ok"
                         }).then(function() {

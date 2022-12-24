@@ -73,18 +73,25 @@
                             <a href="{{ route('semester.index') }}" class="slide-item @if (Request::segment(1) == 'semester') active @endif"> Semester</a>
 
                         </li>
+                        <li>
+                            <a href="{{ route('kelas.index') }}" class="slide-item @if (Request::segment(1) == 'kelas') active @endif"> Kelas</a>
+
+                        </li>
                         
                     </ul>
                 </li>
                 <li class="slide">
                     <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
                         <i class="side-menu__icon fe fe-package"></i>
-                        <span class="side-menu__label">Bootstrap</span>
+                        <span class="side-menu__label">Mapping Data</span>
                         <i class="angle fe fe-chevron-right"></i>
                     </a>
                     <ul class="slide-menu">
-                        <li class="side-menu-label1">
-                            <a href="javascript:void(0)">Bootstrap</a>
+                        <li>
+                            <a href="{{ route('walikelas.index') }}" class="slide-item @if (Request::segment(1) == 'walikelas') active @endif"> Wali Kelas</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('kelasmurid.index') }}" class="slide-item @if (Request::segment(1) == 'kelasmurid') active @endif"> Kelas Murid</a>
                         </li>
                         <li>
                             <a href="alerts.html" class="slide-item"> Alerts</a>
