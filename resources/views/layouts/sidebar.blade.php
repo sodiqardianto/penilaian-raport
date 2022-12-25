@@ -77,7 +77,10 @@
                             <a href="{{ route('kelas.index') }}" class="slide-item @if (Request::segment(1) == 'kelas') active @endif"> Kelas</a>
 
                         </li>
-                        
+                        <li>
+                            <a href="{{ route('kategori.index') }}" class="slide-item @if (Request::segment(1) == 'kategori') active @endif"> Kategori</a>
+
+                        </li>
                     </ul>
                 </li>
                 <li class="slide">
@@ -92,6 +95,12 @@
                         </li>
                         <li>
                             <a href="{{ route('kelasmurid.index') }}" class="slide-item @if (Request::segment(1) == 'kelasmurid') active @endif"> Kelas Murid</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('gurupelajaran.index') }}" class="slide-item @if (Request::segment(1) == 'gurupelajaran') active @endif"> Guru Pelajaran</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('kelaspelajaran.index') }}" class="slide-item @if (Request::segment(1) == 'kelaspelajaran') active @endif"> Kelas Pelajaran</a>
                         </li>
                         <li>
                             <a href="alerts.html" class="slide-item"> Alerts</a>

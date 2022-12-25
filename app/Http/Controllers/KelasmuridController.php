@@ -50,9 +50,12 @@ class KelasmuridController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    {   
         $kelas = Kelas::all();
-        $murid = Murid::all();
+        $murid = Murid::whereNotIn('id',function($query){
+            $query->select('idmurid')
+            ->from('kelasmurid');
+        })->get();
         return view('kelasmurid.create',compact('kelas','murid'));
     }
 
@@ -66,7 +69,7 @@ class KelasmuridController extends Controller
     {
         $this->validate($request, [
             'idkelas' => 'required',
-            'idmurid' => 'required',
+            'idmurid' => 'required|unique:kelasmurid',
         ]);
 
         // Membuat record baru di table semester
@@ -101,7 +104,9 @@ class KelasmuridController extends Controller
      */
     public function edit(Kelasmurid $kelasmurid)
     {
-        //
+        $kelas = Kelas::all();
+        $murid = Murid::all();
+        return view('kelasmurid.edit',compact('kelas','murid','kelasmurid'));
     }
 
     /**
@@ -113,7 +118,32 @@ class KelasmuridController extends Controller
      */
     public function update(Request $request, Kelasmurid $kelasmurid)
     {
-        //
+        
+        // Validasi data yang dikirim
+        if ($request->idmurid == $kelasmurid->idmurid) {
+            $this->validate($request, [
+                'idkelas' => 'required',
+                'idmurid' => 'required',
+            ]);
+        }else{
+            $this->validate($request, [
+                'idkelas' => 'required',
+                'idmurid' => 'required|unique:kelasmurid',
+            ]);
+        }
+        $data = Kelasmurid::findOrFail($kelasmurid->id);
+        
+        // Mengupdate data semester
+        $data->update([
+            'idkelas' => $request->idkelas,
+            'idmurid' => $request->idmurid,
+        ]);
+
+        if ($data) {
+            return redirect()->route('kelasmurid.index')->with('success', 'Data Kelas Murid Berhasil Diubah');
+        } else {
+            return redirect()->route('kelasmurid.edit')->with('error', 'Data Kelas Murid Gagal Diubah');
+        }
     }
 
     /**
@@ -124,6 +154,8 @@ class KelasmuridController extends Controller
      */
     public function destroy(Kelasmurid $kelasmurid)
     {
-        //
+        $kelasmurid->delete();
+
+        return response()->json(['success' => 'Data Kelas Murid Berhasil Dihapus']);
     }
 }

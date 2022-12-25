@@ -115,7 +115,7 @@ class KelasController extends Controller
         if ($data) {
             return redirect()->route('kelas.index')->with('success', 'Data Kelas Berhasil Diubah');
         } else {
-            return redirect()->route('kelas.create')->with('error', 'Data Kelas Gagal Diubah');
+            return redirect()->route('kelas.edit')->with('error', 'Data Kelas Gagal Diubah');
         }
     }
 

@@ -47,12 +47,21 @@ Route::group(['middleware' => ['auth']], function () {
     
     Route::resource('kelas', App\Http\Controllers\KelasController::class);
     Route::get('datakelas', [App\Http\Controllers\KelasController::class, 'data'])->name('kelas.data');
+
+    Route::resource('kategori', App\Http\Controllers\KategoriController::class);
+    Route::get('datakategori', [App\Http\Controllers\KategoriController::class, 'data'])->name('kategori.data');
     
     Route::resource('walikelas', App\Http\Controllers\WalikelasController::class);
     Route::get('datawalikelas', [App\Http\Controllers\WalikelasController::class, 'data'])->name('walikelas.data');
 
     Route::resource('kelasmurid', App\Http\Controllers\KelasmuridController::class);
     Route::get('datakelasmurid', [App\Http\Controllers\KelasmuridController::class, 'data'])->name('kelasmurid.data');
+
+    Route::resource('gurupelajaran', App\Http\Controllers\GurupelajaranController::class);
+    Route::get('datagurupelajaran', [App\Http\Controllers\GurupelajaranController::class, 'data'])->name('gurupelajaran.data');
+    
+    Route::resource('kelaspelajaran', App\Http\Controllers\KelaspelajaranController::class);
+    Route::get('datakelaspelajaran', [App\Http\Controllers\KelaspelajaranController::class, 'data'])->name('kelaspelajaran.data');
 });
 
 // Auth::routes();
