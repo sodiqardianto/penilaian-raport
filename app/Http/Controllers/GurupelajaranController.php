@@ -71,8 +71,8 @@ class GurupelajaranController extends Controller
         }
 
         $this->validate($request, [
-            'idpelajaran' => 'required',
             'idguru' => 'required',
+            'idpelajaran' => 'required',
         ]);
 
         // Membuat record baru di table semester
@@ -96,9 +96,7 @@ class GurupelajaranController extends Controller
      */
     public function show(Gurupelajaran $gurupelajaran)
     {
-        $pelajaran = Pelajaran::all();
-        $guru = Guru::all();
-        return view('gurupelajaran.edit',compact('pelajaran','guru','gurupelajaran'));
+        //
     }
 
     /**
@@ -109,7 +107,9 @@ class GurupelajaranController extends Controller
      */
     public function edit(Gurupelajaran $gurupelajaran)
     {
-        //
+        $pelajaran = Pelajaran::all();
+        $guru = Guru::all();
+        return view('gurupelajaran.edit',compact('pelajaran','guru','gurupelajaran'));
     }
 
     /**
@@ -122,7 +122,7 @@ class GurupelajaranController extends Controller
     public function update(Request $request, Gurupelajaran $gurupelajaran)
     {
         if ($request->idpelajaran == $gurupelajaran->idpelajaran && $request->idguru == $gurupelajaran->idguru) {
-            return redirect()->route('kelasmurid.edit')->with('error', 'Data Guru Pelajaran Gagal Diubah');
+            return redirect()->route('gurupelajaran.edit',$gurupelajaran->id)->with('error', 'Data Guru Pelajaran Gagal Diubah / Data Sudah Ada');
         }
         
         $this->validate($request, [
@@ -141,7 +141,7 @@ class GurupelajaranController extends Controller
         if ($data) {
             return redirect()->route('gurupelajaran.index')->with('success', 'Data Guru Pelajaran Berhasil Diubah');
         } else {
-            return redirect()->route('gurupelajaran.edit')->with('error', 'Data Guru Pelajaran Gagal Diubah');
+            return redirect()->route('gurupelajaran.edit',$gurupelajaran->id)->with('error', 'Data Guru Pelajaran Gagal Diubah');
         }
 
 
