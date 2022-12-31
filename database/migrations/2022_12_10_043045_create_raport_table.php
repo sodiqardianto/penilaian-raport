@@ -21,6 +21,8 @@ class CreateRaportTable extends Migration
             $table->foreign('idkategorinilai')->references('id')->on('kategorinilai')->onUpdate('cascade')->onDelete('cascade');
             $table->integer('idsemester')->unsigned()->nullable();
             $table->foreign('idsemester')->references('id')->on('semester')->onUpdate('cascade')->onDelete('cascade');
+            $table->integer('idpelajaran')->unsigned()->nullable();
+            $table->foreign('idpelajaran')->references('id')->on('pelajaran')->onUpdate('cascade')->onDelete('cascade');
             $table->double('nilai');
             $table->text('deskripsi');
             $table->timestamps();
