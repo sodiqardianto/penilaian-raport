@@ -44,13 +44,13 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('semester', App\Http\Controllers\SemesterController::class);
     Route::get('datasemester', [App\Http\Controllers\SemesterController::class, 'data'])->name('semester.data');
-    
+
     Route::resource('kelas', App\Http\Controllers\KelasController::class);
     Route::get('datakelas', [App\Http\Controllers\KelasController::class, 'data'])->name('kelas.data');
 
     Route::resource('kategori', App\Http\Controllers\KategoriController::class);
     Route::get('datakategori', [App\Http\Controllers\KategoriController::class, 'data'])->name('kategori.data');
-    
+
     Route::resource('walikelas', App\Http\Controllers\WalikelasController::class);
     Route::get('datawalikelas', [App\Http\Controllers\WalikelasController::class, 'data'])->name('walikelas.data');
 
@@ -59,9 +59,12 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('gurupelajaran', App\Http\Controllers\GurupelajaranController::class);
     Route::get('datagurupelajaran', [App\Http\Controllers\GurupelajaranController::class, 'data'])->name('gurupelajaran.data');
-    
+
     Route::resource('kelaspelajaran', App\Http\Controllers\KelaspelajaranController::class);
     Route::get('datakelaspelajaran', [App\Http\Controllers\KelaspelajaranController::class, 'data'])->name('kelaspelajaran.data');
+
+    Route::resource('raport', App\Http\Controllers\RaportController::class);
+    Route::get('dataraport', [App\Http\Controllers\RaportController::class, 'data'])->name('raport.data');
 });
 
 // Auth::routes();

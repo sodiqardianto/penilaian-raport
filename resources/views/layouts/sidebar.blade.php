@@ -129,7 +129,7 @@
                     </a>
                     <ul class="slide-menu">
                         <li>
-                            <a href="{{ route('murid.index') }}" class="slide-item @if (Request::segment(1) == 'murid') active @endif"> Raport</a>
+                            <a href="{{ route('raport.index') }}" class="slide-item @if (Request::segment(1) == 'murid') active @endif"> Raport</a>
                         </li>
                         <li>
                             <a href="{{ route('guru.index') }}" class="slide-item @if (Request::segment(1) == 'guru') active @endif"> Absen</a>
