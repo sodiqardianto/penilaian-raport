@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Absen;
+use App\Models\Kelasmurid;
+use App\Models\Semester;
+use App\Models\Walikelas;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 
 class AbsenController extends Controller
@@ -15,23 +20,42 @@ class AbsenController extends Controller
      */
     public function data()
     {
-        $absen = Absen::all();
+        $user = Auth::user();
+        $id = $user->load('guru')->guru[0]->id;
+        $idkelas =  Walikelas::where('idguru', $id)->select('idkelas')->first();
+        $absen = Absen::rightjoin('kelasmurid', 'absen.idmurid', '=', 'kelasmurid.idmurid')
+            ->select('absen.id',  'absen.idsemester',  'absen.alpha', 'absen.sakit', 'absen.izin', 'kelasmurid.idkelas', 'kelasmurid.idmurid')
+            ->where('kelasmurid.idkelas', $idkelas->idkelas)->get();
+        // dd($absen);
         return DataTables::of($absen)
             ->addIndexColumn()
+            ->addColumn('murid', function ($absen) {
+
+                return $absen->murid->namamurid;
+            })
+            ->addColumn('semesterstr', function ($absen) {
+                if ($absen->idsemester != null) {
+                    return $absen->semester->semester;
+                } else {
+                    return '';
+                }
+            })
             ->addColumn('action', function ($absen) {
-                if ($absen->id == 1) {
+                if ($absen->id != null) {
                     $delete = '<button data-id="' . $absen->id . '" class="btn btn-danger btn-sm delete"><i class="fa fa-trash"></i> Delete</button>';
                 } else {
-                    $delete = '<button data-id="' . $absen->id . '" class="btn btn-danger btn-sm delete"><i class="fa fa-trash"></i> Delete</button>';
+                    $delete = '';
                 }
-                $edit = '<a href="' . route('absen.edit', $absen->id) . '" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i> Ubah</a>';
-                return $edit . ' ' . $delete;
+                // $edit = '<a href="' . route('absen.edit', $absen->id) . '" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i> Ubah</a>';
+                // return $edit . ' ' . $delete;
+                return $delete;
             })
             ->make(true);
     }
 
     public function index()
     {
+
         return view('absen.index');
     }
 
@@ -42,7 +66,20 @@ class AbsenController extends Controller
      */
     public function create()
     {
-        //
+        $user = Auth::user();
+        $id = $user->load('guru')->guru[0]->id;
+        $idkelas =  Walikelas::where('idguru', $id)->select('idkelas')->first();
+        $murid = Kelasmurid::where('idkelas', '=', $idkelas->idkelas)->get();
+        $currentMonth = Carbon::now()->month;
+
+        if ($currentMonth >= 1 && $currentMonth <= 6) {
+            // kode yang akan dieksekusi jika bulan saat ini adalah Januari sampai Juni
+            $semester = Semester::where('tahun', '=', date('Y'))->where('semester', 1)->get();
+        } else {
+            $semester = Semester::where('tahun', '=', date('Y'))->where('semester', 2)->get();
+        }
+
+        return view('absen.create', compact('id', 'murid', 'semester'));
     }
 
     /**
@@ -53,7 +90,36 @@ class AbsenController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = Absen::where('idmurid', $request->idmurid)
+            ->where('idsemester', $request->idsemester)
+            ->count();
+        if ($data > 0) {
+            return redirect()->route('absen.create')->with('error', 'Data Absen Gagal Diubah / Data Sudah Ada');
+        }
+
+        $this->validate($request, [
+            'idmurid' => 'required',
+            'idsemester' => 'required',
+            'izin' => 'required',
+            'alpha' => 'required',
+            'sakit' => 'required',
+
+        ]);
+
+        // Membuat record baru di table semester
+        $data = Absen::create([
+            'idmurid' => $request->idmurid,
+            'idsemester' => $request->idsemester,
+            'izin' => $request->izin,
+            'alpha' => $request->alpha,
+            'sakit' => $request->sakit,
+        ]);
+
+        if ($data) {
+            return redirect()->route('absen.index')->with('success', 'Data Absen Berhasil Ditambahkan');
+        } else {
+            return redirect()->route('absen.create')->with('error', 'Data Absen Gagal Ditambahkan');
+        }
     }
 
     /**
@@ -98,6 +164,7 @@ class AbsenController extends Controller
      */
     public function destroy(Absen $absen)
     {
-        //
+        $absen->delete();
+        return response()->json(['success' => 'Nilai berhasil dihapus']);
     }
 }

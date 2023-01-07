@@ -105,8 +105,8 @@
                         
                     </ul>
                 </li>
-                <li class="slide @if (Request::segment(1) == 'raport' || Request::segment(1) == 'absen' ) is-expanded @endif">
-                    <a class="side-menu__item @if (Request::segment(1) == 'raport' || Request::segment(1) == 'absen') active @endif" data-bs-toggle="slide" href="javascript:void(0)">
+                <li class="slide @if (Request::segment(1) == 'raport' || Request::segment(1) == 'absen' || Request::segment(1) == 'penilaianwalikelas') is-expanded @endif">
+                    <a class="side-menu__item @if (Request::segment(1) == 'raport' || Request::segment(1) == 'absen'||Request::segment(1) == 'penilaianwalikelas') active @endif" data-bs-toggle="slide" href="javascript:void(0)">
                         <i class="side-menu__icon fe fe-slack"></i>
                         <span class="side-menu__label">Raport</span>
                         <i class="angle fe fe-chevron-right"></i>
@@ -116,7 +116,10 @@
                             <a href="{{ route('raport.index') }}" class="slide-item @if (Request::segment(1) == 'raport') active @endif"> Raport</a>
                         </li>
                         <li>
-                            <a href="{{ route('guru.index') }}" class="slide-item @if (Request::segment(1) == 'absen') active @endif"> Absen</a>
+                            <a href="{{ route('absen.index') }}" class="slide-item @if (Request::segment(1) == 'absen') active @endif"> Absen</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('absen.index') }}" class="slide-item @if (Request::segment(1) == 'penilaiansiswa') active @endif"> Penilaian Siswa</a>
                         </li>
                     </ul>
                 </li>
