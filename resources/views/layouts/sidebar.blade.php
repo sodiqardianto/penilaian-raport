@@ -53,8 +53,8 @@
                 <li class="sub-category">
                     <h3>UI Kit</h3>
                 </li>
-                <li class="slide @if (Request::segment(1) == 'murid' || Request::segment(1) == 'guru' || Request::segment(1) == 'pelajaran' || Request::segment(1) == 'semester') is-expanded @endif">
-                    <a class="side-menu__item @if (Request::segment(1) == 'murid' || Request::segment(1) == 'guru' || Request::segment(1) == 'pelajaran' || Request::segment(1) == 'semester') active @endif" data-bs-toggle="slide" href="javascript:void(0)">
+                <li class="slide @if (Request::segment(1) == 'murid' || Request::segment(1) == 'guru' || Request::segment(1) == 'pelajaran' || Request::segment(1) == 'semester'|| Request::segment(1) == 'kelas'|| Request::segment(1) == 'kategori') is-expanded @endif">
+                    <a class="side-menu__item @if (Request::segment(1) == 'murid' || Request::segment(1) == 'guru' || Request::segment(1) == 'pelajaran' || Request::segment(1) == 'semester'|| Request::segment(1) == 'kelas'|| Request::segment(1) == 'kategori') active @endif" data-bs-toggle="slide" href="javascript:void(0)">
                         <i class="side-menu__icon fe fe-slack"></i>
                         <span class="side-menu__label">Menu Master</span>
                         <i class="angle fe fe-chevron-right"></i>
@@ -83,8 +83,8 @@
                         </li>
                     </ul>
                 </li>
-                <li class="slide">
-                    <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
+                <li class="slide @if (Request::segment(1) == 'walikelas' || Request::segment(1) == 'kelasmurid' || Request::segment(1) == 'gurupelajaran' || Request::segment(1) == 'kelaspelajaran') is-expanded @endif">
+                    <a class="side-menu__item @if (Request::segment(1) == 'walikelas' || Request::segment(1) == 'kelasmurid' || Request::segment(1) == 'gurupelajaran' || Request::segment(1) == 'kelaspelajaran') active @endif" data-bs-toggle="slide" href="javascript:void(0)">
                         <i class="side-menu__icon fe fe-package"></i>
                         <span class="side-menu__label">Mapping Data</span>
                         <i class="angle fe fe-chevron-right"></i>
@@ -102,37 +102,21 @@
                         <li>
                             <a href="{{ route('kelaspelajaran.index') }}" class="slide-item @if (Request::segment(1) == 'kelaspelajaran') active @endif"> Kelas Pelajaran</a>
                         </li>
-                        <li class="sub-slide">
-                            <a class="sub-side-menu__item" data-bs-toggle="sub-slide" href="javascript:void(0)">
-                                <span class="sub-side-menu__label">Avatars</span>
-                                <i class="sub-angle fe fe-chevron-right"></i>
-                            </a>
-                            <ul class="sub-slide-menu">
-                                <li>
-                                    <a href="avatarsquare.html" class="sub-slide-item"> Avatar-Square</a>
-                                </li>
-                                <li>
-                                    <a href="avatar-round.html" class="sub-slide-item"> Avatar-Rounded</a>
-                                </li>
-                                <li>
-                                    <a href="avatar-radius.html" class="sub-slide-item"> Avatar-Radius</a>
-                                </li>
-                            </ul>
-                        </li>
+                        
                     </ul>
                 </li>
-                <li class="slide @if (Request::segment(1) == 'murid' || Request::segment(1) == 'guru' || Request::segment(1) == 'pelajaran' || Request::segment(1) == 'semester') is-expanded @endif">
-                    <a class="side-menu__item @if (Request::segment(1) == 'murid' || Request::segment(1) == 'guru' || Request::segment(1) == 'pelajaran' || Request::segment(1) == 'semester') active @endif" data-bs-toggle="slide" href="javascript:void(0)">
+                <li class="slide @if (Request::segment(1) == 'raport' || Request::segment(1) == 'absen' ) is-expanded @endif">
+                    <a class="side-menu__item @if (Request::segment(1) == 'raport' || Request::segment(1) == 'absen') active @endif" data-bs-toggle="slide" href="javascript:void(0)">
                         <i class="side-menu__icon fe fe-slack"></i>
                         <span class="side-menu__label">Raport</span>
                         <i class="angle fe fe-chevron-right"></i>
                     </a>
                     <ul class="slide-menu">
                         <li>
-                            <a href="{{ route('raport.index') }}" class="slide-item @if (Request::segment(1) == 'murid') active @endif"> Raport</a>
+                            <a href="{{ route('raport.index') }}" class="slide-item @if (Request::segment(1) == 'raport') active @endif"> Raport</a>
                         </li>
                         <li>
-                            <a href="{{ route('guru.index') }}" class="slide-item @if (Request::segment(1) == 'guru') active @endif"> Absen</a>
+                            <a href="{{ route('guru.index') }}" class="slide-item @if (Request::segment(1) == 'absen') active @endif"> Absen</a>
                         </li>
                     </ul>
                 </li>

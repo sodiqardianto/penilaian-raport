@@ -16,7 +16,7 @@ class Raport extends Model
 
     // Menentukan field yang bisa diisi
     protected $fillable = [
-        'idmurid', 'idkategori', 'idsemester', 'idpelajaran', 'nilai', 'deskripsi'
+        'idmurid', 'idkategorinilai', 'idsemester', 'idpelajaran', 'nilai', 'deskripsi'
     ];
 
 
@@ -29,7 +29,7 @@ class Raport extends Model
 
     public function kategori()
     {
-        return $this->belongsTo(Kategori::class, 'idkategori');
+        return $this->belongsTo(Kategori::class, 'idkategorinilai');
     }
 
     public function semester()

@@ -25,7 +25,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">
-                                {{-- <a href="{{ route('raport.create') }}" class="btn btn-primary"><i class="fe fe-plus me-2"></i> Tambah Nilai</a> --}}
+                                <a href="{{ route('raport.edit',$id) }}" class="btn btn-primary"><i class="fe fe-plus me-2"></i> Tambah Nilai</a>
                             </h3>
                         </div>
                         <div class="card-body">
@@ -66,7 +66,7 @@
             searchPlaceholder: "Cari ..."
         },
         ajax: {
-            url: "{{ route('raport.data') }}",
+            url: "{{ route('raport.data',$id) }}",
             type: "GET",
         },
         columns: [{

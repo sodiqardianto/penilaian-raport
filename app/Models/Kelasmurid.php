@@ -19,11 +19,11 @@ class Kelasmurid extends Model
 
     public function kelas()
     {
-        return $this->belongsTo(Kelas::class,'idkelas');
+        return $this->belongsTo(Kelas::class, 'idkelas');
     }
 
     public function murid()
     {
-        return $this->belongsTo(Murid::class,'idmurid');
+        return $this->belongsTo(Murid::class, 'idmurid');
     }
 }

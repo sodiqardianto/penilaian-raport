@@ -15,8 +15,10 @@ class CreateGuruTable extends Migration
     {
         Schema::create('guru', function (Blueprint $table) {
             $table->increments('id', 10);
-            $table->string('namaguru',30);
-            $table->string('notelp',13);
+            $table->string('namaguru', 30);
+            $table->string('notelp', 13);
+            $table->integer('iduser')->unsigned()->nullable();
+            $table->foreign('iduser')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

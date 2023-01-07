@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'Kelas Pelajaran')
+@section('title', 'Raport')
 @section('content')
 <!--app-content open-->
 <div class="main-content app-content mt-0">
@@ -23,18 +23,18 @@
             <div class="row row-sm">
                 <div class="col-lg-12">
                     <div class="card">
-                        <div class="card-header">
+                        {{-- <div class="card-header">
                             <h3 class="card-title">
                                 <a href="{{ route('kelaspelajaran.create') }}" class="btn btn-primary"><i class="fe fe-plus me-2"></i> Tambah @yield('title')</a>
                             </h3>
-                        </div>
+                        </div> --}}
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table id="example2" class="table table-bordered text-nowrap border-bottom">
                                     <thead>
                                         <tr>
                                             <th class="border-bottom-0">No</th>
-                                            <th class="border-bottom-0">Nama Guru</th>
+                                            {{-- <th class="border-bottom-0">Nama Guru</th> --}}
                                             <th class="border-bottom-0">Pelajaran</th>
                                             <th class="border-bottom-0">Kelas</th>
                                             <th class="border-bottom-0">Aksi</th>
@@ -64,7 +64,7 @@
             searchPlaceholder: "Cari ..."
         },
         ajax: {
-            url: "{{ route('kelaspelajaran.data') }}",
+            url: "{{ route('raport.datakelas') }}",
             type: "GET",
         },
         columns: [{
@@ -73,10 +73,10 @@
                 orderable: false,
                 searchable: false
             },
-            {
-                data: 'guru',
-                name: 'guru'
-            },
+            // {
+            //     data: 'guru',
+            //     name: 'guru'
+            // },
             {
                 data: 'pelajaran',
                 name: 'pelajaran'

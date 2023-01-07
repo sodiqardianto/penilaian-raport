@@ -64,8 +64,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('datakelaspelajaran', [App\Http\Controllers\KelaspelajaranController::class, 'data'])->name('kelaspelajaran.data');
 
     Route::resource('raport', App\Http\Controllers\RaportController::class);
-    Route::get('dataraport', [App\Http\Controllers\RaportController::class, 'data'])->name('raport.data');
-});
+    Route::get('dataraport/{id}', [App\Http\Controllers\RaportController::class, 'data'])->name('raport.data');
+    Route::get('raport/{idkelas}/kelasraport', [App\Http\Controllers\RaportController::class, 'kelasreport'])->name('raport.kelas');
+    Route::get('datareportkelas', [App\Http\Controllers\RaportController::class, 'datakelas'])->name('raport.datakelas');
+
+    Route::resource('absen', App\Http\Controllers\AbsenController::class);
+    Route::get('dataabsen', [App\Http\Controllers\AbsenController::class, 'data'])->name('absen.data');
+}); 
 
 // Auth::routes();
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
