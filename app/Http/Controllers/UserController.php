@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
@@ -50,7 +51,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('user.create');
+        $roles = Role::all();
+        return view('user.create', compact('roles'));
     }
 
     /**
@@ -65,6 +67,7 @@ class UserController extends Controller
             'name' => 'required',
             'username' => 'required|unique:users,username',
             'email' => 'required|email|unique:users',
+            'role' => 'required',
             'password' => 'required|min:6|confirmed'
         ));
 
@@ -75,7 +78,9 @@ class UserController extends Controller
             'password' => Hash::make($request->password)
         ]);
 
+
         if ($user) {
+            $user->assignRole($request->role);
             return redirect()->route('users.index')->with('success', 'User berhasil dibuat');
         } else {
             return redirect()->route('users.create')->with('error', 'User gagal dibuat');
@@ -101,7 +106,9 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('user.edit', compact('user'));
+        $roles = Role::all();
+        $role_satuan = $user->roles->first();
+        return view('user.edit', compact('user', 'roles', 'role_satuan'));
     }
 
     /**

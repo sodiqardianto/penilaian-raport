@@ -49,6 +49,19 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
+                                {{-- role --}}
+                                <div class="form-group">
+                                    <label class="form-label">Role</label>
+                                    <select name="role" class="form-control form-select select2">
+                                        <option value="" selected disabled>-- Pilih Role --</option>
+                                        @foreach ($roles as $role)
+                                        <option value="{{ $role->id }}" {{ $role->id = $role_satuan ? 'selected' : '' }} >{{ $role->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('email')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
                                 <div class="form-group">
                                     <label class="form-label">Status</label>
                                     <select name="status" class="form-control form-select select2">

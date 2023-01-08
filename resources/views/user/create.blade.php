@@ -49,6 +49,19 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
+                                    <label class="form-label">Role</label>
+                                    <select name="role" class="form-control form-select select2 select2-hidden-accessible @error('role') is-invalid state-invalid @enderror" data-bs-placeholder="Pilih Role" tabindex="-1" aria-hidden="true">
+                                        <option value="" selected disabled>Pilih Role</option>
+                                        @foreach ($roles as $role)
+                                        <option value="{{ $role->id }}" {{ old('role') == $role->id ? 'selected' : '' }}>{{ $role->name }}</option>
+                                        @endforeach
+                                    </select> 
+                                    @error('role')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
                                     <label class="form-label">Password</label>
                                     <input type="password" name="password" class="form-control @error('password') is-invalid state-invalid @enderror" placeholder="Password">
                                     @error('password')
