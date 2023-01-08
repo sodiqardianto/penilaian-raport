@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'Absen')
+@section('title', 'Sikap dan Catatan')
 @section('content')
 <!--app-content open-->
 <div class="main-content app-content mt-0">
@@ -25,7 +25,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">
-                                <a href="{{ route('absen.create') }}" class="btn btn-primary"><i class="fe fe-plus me-2"></i> Tambah Absen</a>
+                                <a href="{{ route('sikap.create') }}" class="btn btn-primary"><i class="fe fe-plus me-2"></i> Tambah Sikap dan Catatan</a>
                             </h3>
                         </div>
                         <div class="card-body">
@@ -36,9 +36,9 @@
                                             <th class="border-bottom-0">No</th>
                                             <th class="border-bottom-0">Nama Murid</th>
                                             <th class="border-bottom-0">Semester</th>
-                                            <th class="border-bottom-0">Alpha</th>
-                                            <th class="border-bottom-0">Izin</th>
-                                            <th class="border-bottom-0">Sakit</th>
+                                            <th class="border-bottom-0">Kategori</th>
+                                            <th class="border-bottom-0">Sikap</th>
+                                            <th class="border-bottom-0">Deskripsi</th>
                                             {{-- <th class="border-bottom-0">Jenis Kelamin</th> --}}
                                             {{-- <th class="border-bottom-0">Status</th> --}}
                                             <th class="border-bottom-0">Aksi</th>
@@ -68,7 +68,7 @@
             searchPlaceholder: "Cari ..."
         },
         ajax: {
-            url: "{{ route('absen.data') }}",
+            url: "{{ route('sikap.data') }}",
             type: "GET",
         },
         columns: [{
@@ -86,16 +86,16 @@
                 name: 'semesterstr'
             },
             {
-                data: 'alpha',
-                name: 'alpha'
+                data: 'kategori',
+                name: 'kategori'
             },
             {
-                data: 'izin',
-                name: 'izin'
+                data: 'pelajaran',
+                name: 'pelajaran'
             },
             {
-                data: 'sakit',
-                name: 'sakit'
+                data: 'deskripsi',
+                name: 'deskripsi'
             },
             {
                 data: 'action',
@@ -113,9 +113,9 @@
     $(document).on("click", ".delete", function(e) {
         var id = $(this).attr('data-id');
         Swal.fire({
-            title: "Hapus Absen?",
+            title: "Hapus Sikap?",
             icon: 'error',
-            text: "Apakah kamu ingin menghapus Absen! ",
+            text: "Apakah kamu ingin menghapus Sikap! ",
             showCancelButton: !0,
             confirmButtonText: "Hapus",
             cancelButtonText: "Cancel",
@@ -123,7 +123,7 @@
         }).then(function (e) {
             if (e.value === true) {
                 $.ajax({
-                    url: "{{url('/absen')}}/" + id,
+                    url: "{{url('/sikap')}}/" + id,
                     type: 'DELETE',
                     data: {
                         _token: "{{ csrf_token() }}",
@@ -133,7 +133,7 @@
                     success: function (data) {
                         Swal.fire({
                             title: "Berhasil!",
-                            text: "Absen berhasil dihapus!",
+                            text: "Sikap berhasil dihapus!",
                             icon: "success",
                             confirmButtonText: "Ok"
                         }).then(function() {

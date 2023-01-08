@@ -41,16 +41,17 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
-                                {{-- <div class="form-group">
-                                    <label class="form-label">Jenis Kelamin</label>
-                                    <select name="jk" class="form-control form-select select2 select2-hidden-accessible @error('jk') is-invalid state-invalid @enderror" data-bs-placeholder="Pilih Jenis Kelamin" tabindex="-1" aria-hidden="true">
-                                        <option value="1">Laki-Laki</option> 
-                                        <option value="0">Perempuan</option> 
+                                <div class="form-group">
+                                    <label class="form-label">Username</label>
+                                    <select name="iduser" class="form-control form-select select2 select2-hidden-accessible @error('iduser') is-invalid state-invalid @enderror" data-bs-placeholder="Pilih Jenis Kelamin" tabindex="-1" aria-hidden="true">
+                                        @foreach ($user as $item)
+                                        <option value="{{$item->id}}">{{$item->username}}</option> 
+                                        @endforeach
                                     </select> 
-                                    @error('jk')
+                                    @error('iduser')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
-                                    </div> --}}
+                                </div>
                                 
                             </div>
                             <div class="card-footer text-end">

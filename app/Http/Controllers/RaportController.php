@@ -194,7 +194,7 @@ class RaportController extends Controller
         } else {
             $semester = Semester::where('tahun', '=', date('Y'))->where('semester', 2)->get();
         }
-        $kategori = Kategori::wherenotin('id', [1])->get();
+        $kategori = Kategori::wherein('id', [2, 3])->get();
         return view('raport.edit', compact('id', 'murid', 'pelajaran', 'semester', 'kategori'));
     }
 

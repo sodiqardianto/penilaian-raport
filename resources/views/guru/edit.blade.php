@@ -42,16 +42,17 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
-                                {{-- <div class="form-group">
-                                    <label class="form-label">Jenis Kelamin</label>
-                                    <select name="jk" class="form-control form-select select2 select2-hidden-accessible @error('jk') is-invalid state-invalid @enderror" data-bs-placeholder="Pilih Jenis Kelamin" tabindex="-1" aria-hidden="true">
-                                        <option value="1" {{$murid->jeniskelamin==1? 'checked':''}}>Laki-Laki</option> 
-                                        <option value="0" {{$murid->jeniskelamin==0? 'checked':''}}>Perempuan</option> 
+                                <div class="form-group">
+                                    <label class="form-label">Username</label>
+                                    <select name="iduser" class="form-control form-select select2 select2-hidden-accessible @error('iduser') is-invalid state-invalid @enderror" data-bs-placeholder="Pilih Jenis Kelamin" tabindex="-1" aria-hidden="true">
+                                        @foreach ($user as $item)
+                                        <option value="{{$item->id}}"{{$item->id==$guru->iduser ? 'selected':''}}>{{$item->username}}</option> 
+                                        @endforeach
                                     </select> 
-                                    @error('jk')
+                                    @error('iduser')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
-                                    </div> --}}
+                                </div>
                                 
                             </div>
 

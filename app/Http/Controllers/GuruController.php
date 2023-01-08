@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Guru;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -26,6 +27,13 @@ class GuruController extends Controller
         $guru = Guru::all();
         return DataTables::of($guru)
             ->addIndexColumn()
+            ->addColumn('username', function ($guru) {
+                if ($guru->iduser != null) {
+                    return $guru->user->username;
+                } else {
+                    return '';
+                }
+            })
             ->addColumn('action', function ($guru) {
                 if ($guru->id == 1) {
                     $delete = '<button data-id="' . $guru->id . '" class="btn btn-danger btn-sm delete"><i class="fa fa-trash"></i> Delete</button>';
@@ -50,7 +58,8 @@ class GuruController extends Controller
      */
     public function create()
     {
-        return view('guru.create');
+        $user = User::all();
+        return view('guru.create', compact('user'));
     }
 
     /**
@@ -61,6 +70,11 @@ class GuruController extends Controller
      */
     public function store(Request $request)
     {
+
+        $guru = Guru::where('namaguru', $request->namaguru)->where('iduser', $request->iduser)->count();
+        if ($guru > 0) {
+            return redirect()->route('guru.create')->with('error', 'Data Guru Gagal Ditambahkan / Id Guru Sudah ada');
+        }
         // Validasi data yang dikirim
         $this->validate($request, [
             'namaguru' => 'required',
@@ -71,6 +85,7 @@ class GuruController extends Controller
         $data = Guru::create([
             'namaguru' => $request->namaguru,
             'notelp' => $request->notelp,
+            'iduser' => intval($request->iduser),
         ]);
         if ($data) {
             return redirect()->route('guru.index')->with('success', 'Data Guru Berhasil Ditambahkan');
@@ -98,7 +113,8 @@ class GuruController extends Controller
      */
     public function edit(Guru $guru)
     {
-        return view('guru.edit', compact('guru'));
+        $user = User::all();
+        return view('guru.edit', compact('guru', 'user'));
     }
 
     /**
@@ -110,7 +126,10 @@ class GuruController extends Controller
      */
     public function update(Request $request, Guru $guru)
     {
-        // Mencari record guru berdasarkan ID yang diberikan
+        $datacheck = Guru::where('namaguru', $request->namaguru)->where('iduser', $request->iduser)->count();
+        if ($datacheck > 0) {
+            return redirect()->route('guru.edit', $guru->id)->with('error', 'Data Guru Gagal Ditambahkan / Id Guru Sudah ada');
+        }
         $data = Guru::findOrFail($guru->id);
 
         // Validasi data yang dikirim
@@ -123,12 +142,13 @@ class GuruController extends Controller
         $data->update([
             'namaguru' => $request->namaguru,
             'notelp' => $request->notelp,
+            'iduser' => intval($request->iduser),
         ]);
 
         if ($data) {
             return redirect()->route('guru.index')->with('success', 'Data Guru Berhasil Diubah');
         } else {
-            return redirect()->route('guru.create')->with('error', 'Data Guru Gagal Diubah');
+            return redirect()->route('guru.edit', $guru->id)->with('error', 'Data Guru Gagal Diubah');
         }
     }
 

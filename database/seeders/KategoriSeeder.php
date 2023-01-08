@@ -15,11 +15,7 @@ class KategoriSeeder extends Seeder
     public function run()
     {
         Kategori::create([
-            'namakategorinilai' => 'Sikap Spiritual',
-        ]);
-
-        Kategori::create([
-            'namakategorinilai' => 'Sikap Sosial',
+            'namakategorinilai' => 'Sikap',
         ]);
 
         Kategori::create([

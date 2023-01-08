@@ -1,0 +1,143 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Raport;
+use App\Models\Kategori;
+use App\Models\Kelasmurid;
+use App\Models\Pelajaran;
+use App\Models\Semester;
+use App\Models\Walikelas;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Yajra\DataTables\Facades\DataTables;
+
+class EkstrakulikulerController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function data()
+    {
+        $user = Auth::user();
+        $id = $user->load('guru')->guru[0]->id;
+        $idkelas =  Walikelas::where('idguru', $id)->select('idkelas')->first();
+        $sikap = Raport::join('kelasmurid', 'raport.idmurid', '=', 'kelasmurid.idmurid')
+            ->select('raport.id',  'raport.idsemester', 'raport.idpelajaran', 'raport.idkategorinilai', 'raport.deskripsi', 'kelasmurid.idkelas', 'kelasmurid.idmurid')
+            ->where('kelasmurid.idkelas', $idkelas->idkelas)
+            ->wherein('raport.idkategorinilai', [4])
+            ->get();
+        // dd($sikap);
+        return DataTables::of($sikap)
+            ->addIndexColumn()
+            ->addColumn('murid', function ($sikap) {
+
+                return $sikap->murid->namamurid;
+            })
+            ->addColumn('pelajaran', function ($sikap) {
+                if ($sikap->idpelajaran != null) {
+                    return $sikap->pelajaran->namamatapelajaran;
+                } else {
+                    return '';
+                }
+            })
+            ->addColumn('semesterstr', function ($sikap) {
+                if ($sikap->idsemester != null) {
+                    return $sikap->semester->semester == 1 ? 'Ganjil ' . $sikap->semester->tahun : 'Genap ' . $sikap->semester->tahun;
+                } else {
+                    return '';
+                }
+            })
+            ->addColumn('kategori', function ($sikap) {
+                if ($sikap->idkategorinilai != null) {
+                    return $sikap->kategori->namakategorinilai;
+                } else {
+                    return '';
+                }
+            })
+            ->addColumn('action', function ($sikap) {
+                if ($sikap->id != null) {
+                    $delete = '<button data-id="' . $sikap->id . '" class="btn btn-danger btn-sm delete"><i class="fa fa-trash"></i> Delete</button>';
+                } else {
+                    $delete = '';
+                }
+                // $edit = '<a href="' . route('sikap.edit', $sikap->id) . '" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i> Ubah</a>';
+                // return $edit . ' ' . $delete;
+                return $delete;
+            })
+            ->make(true);
+    }
+    public function index()
+    {
+        return view('ekstrakulikuler.index');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
+}

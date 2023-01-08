@@ -12,6 +12,7 @@ class Pelajaran extends Model
     // Menentukan field yang bisa diisi
     protected $fillable = [
         'namamatapelajaran',
+        'muatan'
     ];
 
     // Menentukan nama table yang digunakan

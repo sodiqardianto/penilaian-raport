@@ -70,6 +70,12 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('absen', App\Http\Controllers\AbsenController::class);
     Route::get('dataabsen', [App\Http\Controllers\AbsenController::class, 'data'])->name('absen.data');
+
+    Route::resource('sikap', App\Http\Controllers\SikapController::class);
+    Route::get('datasikap', [App\Http\Controllers\SikapController::class, 'data'])->name('sikap.data');
+
+    Route::resource('ekstrakulikuler', App\Http\Controllers\EkstrakulikulerController::class);
+    Route::get('dataekstrakulikuler', [App\Http\Controllers\EkstrakulikulerController::class, 'data'])->name('ekstrakulikuler.data');
 }); 
 
 // Auth::routes();

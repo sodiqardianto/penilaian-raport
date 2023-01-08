@@ -42,16 +42,18 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div> --}}
-                                {{-- <div class="form-group">
-                                    <label class="form-label">Jenis Kelamin</label>
-                                    <select name="jk" class="form-control form-select select2 select2-hidden-accessible @error('jk') is-invalid state-invalid @enderror" data-bs-placeholder="Pilih Jenis Kelamin" tabindex="-1" aria-hidden="true">
-                                        <option value="1" {{$murid->jeniskelamin==1? 'checked':''}}>Laki-Laki</option> 
-                                        <option value="0" {{$murid->jeniskelamin==0? 'checked':''}}>Perempuan</option> 
+                                <div class="form-group">
+                                    <label class="form-label">Muatan</label>
+                                    <select name="muatan" class="form-control form-select select2 select2-hidden-accessible @error('muatan') is-invalid state-invalid @enderror" data-bs-placeholder="Pilih Jenis Kelamin" tabindex="-1" aria-hidden="true">
+                                        <option value="sikap" {{$pelajaran->muatan == 'sikap'?'selected':''}}>Sikap</option> 
+                                        <option value="pelajaran" {{$pelajaran->muatan == 'pelajaran'?'selected':''}}>Pelajaran</option> 
+                                        <option value="lokal" {{$pelajaran->muatan == 'lokal'?'selected':''}}>Lokal</option> 
+                                        <option value="Ekstrakulikuler" {{$pelajaran->muatan == 'Ekstrakulikuler'?'selected':''}}>Ekstrakulikuler</option> 
                                     </select> 
-                                    @error('jk')
+                                    @error('muatan')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
-                                    </div> --}}
+                                    </div>
                                 
                             </div>
 

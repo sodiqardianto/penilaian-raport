@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'Absen')
+@section('title', 'Sikap dan Catatan')
 @section('content')
 <div class="main-content app-content mt-0">
     <div class="side-app">
@@ -23,7 +23,7 @@
             <!-- Row -->
             <div class="row">
                 <div class="col-xl-8 col-lg-12">
-                    <form action="{{ route('absen.store') }}" method="POST">
+                    <form action="{{ route('sikap.store') }}" method="POST">
                         @csrf
                         <div class="card">
                             <div class="card-body">
@@ -51,26 +51,35 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label">Izin</label>
-                                    <input type="number" name="izin" class="form-control @error('izin') is-invalid state-invalid @enderror" placeholder="Masukan Izin" value="{{ old('izin') }}" autofocus>
-                                    @error('izin')
+                                    <label class="form-label">Kategori</label>
+                                    <select name="idkategorinilai" id="idkategorinilai" class="form-control form-select select2 select2-hidden-accessible @error('idkategorinilai') is-invalid state-invalid @enderror" data-bs-placeholder="Pilih Kategori" tabindex="-1" aria-hidden="true" >
+                                        @foreach ($kategori as $item)
+                                        <option value="{{$item->id}}">{{$item->namakategorinilai}}</option> 
+                                        @endforeach
+                                    </select> 
+                                    @error('idkategorinilai')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="form-group" id="datamuatan">
+                                    <label class="form-label">Muatan</label>
+                                    <select name="idpelajaran" class="form-control form-select select2 select2-hidden-accessible @error('idmuatan') is-invalid state-invalid @enderror" data-bs-placeholder="Pilih Muatan" tabindex="-1" aria-hidden="true" >
+                                        @foreach ($muatan as $item)
+                                        <option value="{{$item->id}}">{{$item->namamatapelajaran}}</option> 
+                                        @endforeach
+                                    </select> 
+                                    @error('idmuatan')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label">Alpha</label>
-                                    <input type="number" name="alpha" class="form-control @error('alpha') is-invalid state-invalid @enderror" placeholder="Masukan Alpha" value="{{ old('alpha') }}" autofocus>
-                                    @error('alpha')
+                                    <label class="form-label">Deskripsi</label>
+                                    <input type="text" name="deskripsi" class="form-control @error('deskripsi') is-invalid state-invalid @enderror" placeholder="Masukan deskripsi" value="{{ old('deskripsi') }}" autofocus>
+                                    @error('deskripsi')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
-                                <div class="form-group">
-                                    <label class="form-label">Sakit</label>
-                                    <input type="number" name="sakit" class="form-control @error('sakit') is-invalid state-invalid @enderror" placeholder="Masukan Sakit" value="{{ old('sakit') }}" autofocus>
-                                    @error('sakit')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
+                                
 
                             </div>
                             <div class="card-footer text-end">
@@ -88,3 +97,14 @@
     </div>
 </div>
 @endsection
+@push('after-script')
+<script>
+   $('#idkategorinilai').change(function() {
+    if(this.value==1){
+        $('#datamuatan').show();
+    }else{
+        $('#datamuatan').hide();
+    }
+  });
+</script>
+@endpush

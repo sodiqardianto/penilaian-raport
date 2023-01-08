@@ -41,16 +41,18 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div> --}}
-                                {{-- <div class="form-group">
-                                    <label class="form-label">Jenis Kelamin</label>
-                                    <select name="jk" class="form-control form-select select2 select2-hidden-accessible @error('jk') is-invalid state-invalid @enderror" data-bs-placeholder="Pilih Jenis Kelamin" tabindex="-1" aria-hidden="true">
-                                        <option value="1">Laki-Laki</option> 
-                                        <option value="0">Perempuan</option> 
+                                <div class="form-group">
+                                    <label class="form-label">Muatan</label>
+                                    <select name="muatan" class="form-control form-select select2 select2-hidden-accessible @error('muatan') is-invalid state-invalid @enderror" data-bs-placeholder="Pilih Jenis Kelamin" tabindex="-1" aria-hidden="true">
+                                        <option value="sikap">Sikap</option> 
+                                        <option value="pelajaran">Pelajaran</option> 
+                                        <option value="lokal">Lokal</option> 
+                                        <option value="Ekstrakulikuler">Ekstrakulikuler</option> 
                                     </select> 
-                                    @error('jk')
+                                    @error('muatan')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
-                                    </div> --}}
+                                    </div>
                                 
                             </div>
                             <div class="card-footer text-end">

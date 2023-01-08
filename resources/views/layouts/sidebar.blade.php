@@ -105,8 +105,8 @@
                         
                     </ul>
                 </li>
-                <li class="slide @if (Request::segment(1) == 'raport' || Request::segment(1) == 'absen' || Request::segment(1) == 'penilaianwalikelas') is-expanded @endif">
-                    <a class="side-menu__item @if (Request::segment(1) == 'raport' || Request::segment(1) == 'absen'||Request::segment(1) == 'penilaianwalikelas') active @endif" data-bs-toggle="slide" href="javascript:void(0)">
+                <li class="slide @if (Request::segment(1) == 'raport' || Request::segment(1) == 'absen' || Request::segment(1) == 'sikap'||Request::segment(1) == 'ekstrakulikuler') is-expanded @endif">
+                    <a class="side-menu__item @if (Request::segment(1) == 'raport' || Request::segment(1) == 'absen'||Request::segment(1) == 'sikap'||Request::segment(1) == 'ekstrakulikuler') active @endif" data-bs-toggle="slide" href="javascript:void(0)">
                         <i class="side-menu__icon fe fe-slack"></i>
                         <span class="side-menu__label">Raport</span>
                         <i class="angle fe fe-chevron-right"></i>
@@ -119,7 +119,10 @@
                             <a href="{{ route('absen.index') }}" class="slide-item @if (Request::segment(1) == 'absen') active @endif"> Absen</a>
                         </li>
                         <li>
-                            <a href="{{ route('absen.index') }}" class="slide-item @if (Request::segment(1) == 'penilaiansiswa') active @endif"> Penilaian Siswa</a>
+                            <a href="{{ route('sikap.index') }}" class="slide-item @if (Request::segment(1) == 'sikap') active @endif"> Penilaian Sikap dan Catatan</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('absen.index') }}" class="slide-item @if (Request::segment(1) == 'ekstrakulikuler') active @endif"> Penilaian Ekstrakulikuler</a>
                         </li>
                     </ul>
                 </li>

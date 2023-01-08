@@ -35,7 +35,7 @@
                                         <tr>
                                             <th class="border-bottom-0">No</th>
                                             <th class="border-bottom-0">Nama Mata Pelajaran</th>
-                                            {{-- <th class="border-bottom-0">No Telepon</th> --}}
+                                            <th class="border-bottom-0">Muatan</th>
                                             {{-- <th class="border-bottom-0">Jenis Kelamin</th> --}}
                                             {{-- <th class="border-bottom-0">Status</th> --}}
                                             <th class="border-bottom-0">Aksi</th>
@@ -78,10 +78,10 @@
                 data: 'namamatapelajaran',
                 name: 'namamatapelajaran'
             },
-            // {
-            //     data: 'notelp',
-            //     name: 'notelp'
-            // },
+            {
+                data: 'muatan',
+                name: 'muatan'
+            },
             // {
             //     data: 'jeniskelaminstr',
             //     name: 'jeniskelaminstr'

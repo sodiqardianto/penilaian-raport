@@ -21,10 +21,10 @@ class GurupelajaranController extends Controller
         //dd($walikelas);
         return DataTables::of($gurupelajaran)
             ->addIndexColumn()
-            ->addColumn('pelajaran',function($gurupelajaran){
+            ->addColumn('pelajaran', function ($gurupelajaran) {
                 return $gurupelajaran->pelajaran->namamatapelajaran;
             })
-            ->addColumn('guru',function($gurupelajaran){
+            ->addColumn('guru', function ($gurupelajaran) {
                 return $gurupelajaran->guru->namaguru;
             })
             ->addColumn('action', function ($gurupelajaran) {
@@ -51,9 +51,9 @@ class GurupelajaranController extends Controller
      */
     public function create()
     {
-        $pelajaran = Pelajaran::all();
+        $pelajaran = Pelajaran::where('muatan', 'pelajaran')->orwhere('muatan', 'lokal')->get();
         $guru = Guru::all();
-        return view('gurupelajaran.create',compact('pelajaran','guru'));
+        return view('gurupelajaran.create', compact('pelajaran', 'guru'));
     }
 
     /**
@@ -64,9 +64,9 @@ class GurupelajaranController extends Controller
      */
     public function store(Request $request)
     {
-        $data = Gurupelajaran::where('idpelajaran','=',$request->idpelajaran)->where('idguru','=',$request->idguru)->count();
+        $data = Gurupelajaran::where('idpelajaran', '=', $request->idpelajaran)->where('idguru', '=', $request->idguru)->count();
 
-        if($data>0){
+        if ($data > 0) {
             return redirect()->route('gurupelajaran.create')->with('error', 'Data Guru Pelajaran Gagal Ditambahkan');
         }
 
@@ -109,7 +109,7 @@ class GurupelajaranController extends Controller
     {
         $pelajaran = Pelajaran::all();
         $guru = Guru::all();
-        return view('gurupelajaran.edit',compact('pelajaran','guru','gurupelajaran'));
+        return view('gurupelajaran.edit', compact('pelajaran', 'guru', 'gurupelajaran'));
     }
 
     /**
@@ -122,9 +122,9 @@ class GurupelajaranController extends Controller
     public function update(Request $request, Gurupelajaran $gurupelajaran)
     {
         if ($request->idpelajaran == $gurupelajaran->idpelajaran && $request->idguru == $gurupelajaran->idguru) {
-            return redirect()->route('gurupelajaran.edit',$gurupelajaran->id)->with('error', 'Data Guru Pelajaran Gagal Diubah / Data Sudah Ada');
+            return redirect()->route('gurupelajaran.edit', $gurupelajaran->id)->with('error', 'Data Guru Pelajaran Gagal Diubah / Data Sudah Ada');
         }
-        
+
         $this->validate($request, [
             'idpelajaran' => 'required',
             'idguru' => 'required',
@@ -132,8 +132,8 @@ class GurupelajaranController extends Controller
 
 
         $data = Gurupelajaran::findOrFail($gurupelajaran->id);
-         // Mengupdate data semester
-         $data->update([
+        // Mengupdate data semester
+        $data->update([
             'idpelajaran' => $request->idpelajaran,
             'idguru' => $request->idguru,
         ]);
@@ -141,10 +141,8 @@ class GurupelajaranController extends Controller
         if ($data) {
             return redirect()->route('gurupelajaran.index')->with('success', 'Data Guru Pelajaran Berhasil Diubah');
         } else {
-            return redirect()->route('gurupelajaran.edit',$gurupelajaran->id)->with('error', 'Data Guru Pelajaran Gagal Diubah');
+            return redirect()->route('gurupelajaran.edit', $gurupelajaran->id)->with('error', 'Data Guru Pelajaran Gagal Diubah');
         }
-
-
     }
 
     /**
