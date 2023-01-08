@@ -221,4 +221,19 @@ class RaportController extends Controller
         $raport->delete();
         return response()->json(['success' => 'Nilai berhasil dihapus']);
     }
+
+    public function predikat($nilai)
+    {
+        if ($nilai > 89 && $nilai <= 100) {
+            return 'A';
+        } else if ($nilai > 79 && $nilai <= 89) {
+            return 'B';
+        } else if ($nilai > 69 && $nilai <= 79) {
+            return 'C';
+        } else if ($nilai > 59 && $nilai <= 69) {
+            return 'D';
+        } else if ($nilai <= 59) {
+            return 'E';
+        }
+    }
 }

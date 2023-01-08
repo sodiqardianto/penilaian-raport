@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'Sikap dan Catatan')
+@section('title', 'Ekstrakulikuler')
 @section('content')
 <div class="main-content app-content mt-0">
     <div class="side-app">
@@ -23,7 +23,7 @@
             <!-- Row -->
             <div class="row">
                 <div class="col-xl-8 col-lg-12">
-                    <form action="{{ route('sikap.store') }}" method="POST">
+                    <form action="{{ route('ekstrakulikuler.store') }}" method="POST">
                         @csrf
                         <div class="card">
                             <div class="card-body">
@@ -50,17 +50,7 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
-                                <div class="form-group">
-                                    <label class="form-label">Kategori</label>
-                                    <select name="idkategorinilai" id="idkategorinilai" class="form-control form-select select2 select2-hidden-accessible @error('idkategorinilai') is-invalid state-invalid @enderror" data-bs-placeholder="Pilih Kategori" tabindex="-1" aria-hidden="true" >
-                                        @foreach ($kategori as $item)
-                                        <option value="{{$item->id}}">{{$item->namakategorinilai}}</option> 
-                                        @endforeach
-                                    </select> 
-                                    @error('idkategorinilai')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
+                                <input type="hidden" name="idkategorinilai" value="{{$kategori->id}}">
                                 <div class="form-group" id="datamuatan">
                                     <label class="form-label">Muatan</label>
                                     <select name="idpelajaran" class="form-control form-select select2 select2-hidden-accessible @error('idmuatan') is-invalid state-invalid @enderror" data-bs-placeholder="Pilih Muatan" tabindex="-1" aria-hidden="true" >
@@ -68,10 +58,26 @@
                                         <option value="{{$item->id}}">{{$item->namamatapelajaran}}</option> 
                                         @endforeach
                                     </select> 
-                                    @error('idmuatan')
+                                    @error('idpelajaran')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">Nilai</label>
+                                    <select name="nilai" class="form-control form-select select2 select2-hidden-accessible @error('nilai') is-invalid state-invalid @enderror" data-bs-placeholder="Pilih Guru" tabindex="-1" aria-hidden="true">
+                                        <option value="90">A</option> 
+                                        <option value="80">B</option> 
+                                        <option value="70">C</option> 
+                                        <option value="60">D</option> 
+                                        <option value="50">E</option> 
+                                    </select> 
+                                    @error('nilai')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                
+
                                 <div class="form-group">
                                     <label class="form-label">Deskripsi</label>
                                     <input type="text" name="deskripsi" class="form-control @error('deskripsi') is-invalid state-invalid @enderror" placeholder="Masukan deskripsi" value="{{ old('deskripsi') }}" autofocus>
@@ -84,7 +90,7 @@
                             </div>
                             <div class="card-footer text-end">
                                 <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah</button>
-                                <a href="{{ route('absen.index') }}" class="btn btn-default"><i class="fa fa-chevron-left"></i> Kembali</a>
+                                <a href="{{ route('ekstrakulikuler.index') }}" class="btn btn-default"><i class="fa fa-chevron-left"></i> Kembali</a>
                             </div>
                         </div>
                     </form>

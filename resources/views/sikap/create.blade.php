@@ -84,7 +84,7 @@
                             </div>
                             <div class="card-footer text-end">
                                 <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah</button>
-                                <a href="{{ route('absen.index') }}" class="btn btn-default"><i class="fa fa-chevron-left"></i> Kembali</a>
+                                <a href="{{ route('sikap.index') }}" class="btn btn-default"><i class="fa fa-chevron-left"></i> Kembali</a>
                             </div>
                         </div>
                     </form>

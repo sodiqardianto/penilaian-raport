@@ -122,7 +122,7 @@
                             <a href="{{ route('sikap.index') }}" class="slide-item @if (Request::segment(1) == 'sikap') active @endif"> Penilaian Sikap dan Catatan</a>
                         </li>
                         <li>
-                            <a href="{{ route('absen.index') }}" class="slide-item @if (Request::segment(1) == 'ekstrakulikuler') active @endif"> Penilaian Ekstrakulikuler</a>
+                            <a href="{{ route('ekstrakulikuler.index') }}" class="slide-item @if (Request::segment(1) == 'ekstrakulikuler') active @endif"> Penilaian Ekstrakulikuler</a>
                         </li>
                     </ul>
                 </li>

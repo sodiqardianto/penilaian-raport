@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'Sikap dan Catatan')
+@section('title', 'Ekstrakulikuler')
 @section('content')
 <!--app-content open-->
 <div class="main-content app-content mt-0">
@@ -25,7 +25,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">
-                                <a href="{{ route('sikap.create') }}" class="btn btn-primary"><i class="fe fe-plus me-2"></i> Tambah Sikap dan Catatan</a>
+                                <a href="{{ route('ekstrakulikuler.create') }}" class="btn btn-primary"><i class="fe fe-plus me-2"></i> Tambah Ekstrakulikuler</a>
                             </h3>
                         </div>
                         <div class="card-body">
@@ -36,8 +36,8 @@
                                             <th class="border-bottom-0">No</th>
                                             <th class="border-bottom-0">Nama Murid</th>
                                             <th class="border-bottom-0">Semester</th>
-                                            <th class="border-bottom-0">Kategori</th>
-                                            <th class="border-bottom-0">Sikap</th>
+                                            <th class="border-bottom-0">Ekstrakulikuler</th>
+                                            <th class="border-bottom-0">Predikat</th>
                                             <th class="border-bottom-0">Deskripsi</th>
                                             {{-- <th class="border-bottom-0">Jenis Kelamin</th> --}}
                                             {{-- <th class="border-bottom-0">Status</th> --}}
@@ -68,7 +68,7 @@
             searchPlaceholder: "Cari ..."
         },
         ajax: {
-            url: "{{ route('sikap.data') }}",
+            url: "{{ route('ekstrakulikuler.data') }}",
             type: "GET",
         },
         columns: [{
@@ -86,12 +86,12 @@
                 name: 'semesterstr'
             },
             {
-                data: 'kategori',
-                name: 'kategori'
-            },
-            {
                 data: 'pelajaran',
                 name: 'pelajaran'
+            },
+            {
+                data: 'predikat',
+                name: 'predikat'
             },
             {
                 data: 'deskripsi',
@@ -113,9 +113,9 @@
     $(document).on("click", ".delete", function(e) {
         var id = $(this).attr('data-id');
         Swal.fire({
-            title: "Hapus Sikap?",
+            title: "Hapus Ekstrakulikuler?",
             icon: 'error',
-            text: "Apakah kamu ingin menghapus Sikap! ",
+            text: "Apakah kamu ingin menghapus Ekstrakulikuler! ",
             showCancelButton: !0,
             confirmButtonText: "Hapus",
             cancelButtonText: "Cancel",
@@ -123,7 +123,7 @@
         }).then(function (e) {
             if (e.value === true) {
                 $.ajax({
-                    url: "{{url('/sikap')}}/" + id,
+                    url: "{{url('/ekstrakulikuler')}}/" + id,
                     type: 'DELETE',
                     data: {
                         _token: "{{ csrf_token() }}",
@@ -133,7 +133,7 @@
                     success: function (data) {
                         Swal.fire({
                             title: "Berhasil!",
-                            text: "Sikap berhasil dihapus!",
+                            text: "Ekstrakulikuler berhasil dihapus!",
                             icon: "success",
                             confirmButtonText: "Ok"
                         }).then(function() {
