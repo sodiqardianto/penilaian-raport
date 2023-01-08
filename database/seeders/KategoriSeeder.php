@@ -17,26 +17,33 @@ class KategoriSeeder extends Seeder
         Kategori::create([
             'namakategorinilai' => 'Sikap Spiritual',
         ]);
+
         Kategori::create([
             'namakategorinilai' => 'Sikap Sosial',
         ]);
+
         Kategori::create([
-            'namakategorinilai' => 'Catatan',
+            'namakategorinilai' => 'Pengetahuan',
         ]);
+
+        // Kategori::create([
+        //     'namakategorinilai' => 'Pengetahuan Muatan Lokal',
+        // ]);
+
         Kategori::create([
-            'namakategorinilai' => 'Pengetahuan Muatan Pelajaran',
+            'namakategorinilai' => 'Keterampilan',
         ]);
-        Kategori::create([
-            'namakategorinilai' => 'Pengetahuan Muatan Lokal',
-        ]);
-        Kategori::create([
-            'namakategorinilai' => 'Keterampilan Muatan Pelajaran',
-        ]);
-        Kategori::create([
-            'namakategorinilai' => 'Keterampilan Muatan Lokal',
-        ]);
+
+        // Kategori::create([
+        //     'namakategorinilai' => 'Keterampilan Muatan Lokal',
+        // ]);
+
         Kategori::create([
             'namakategorinilai' => 'Ekstrakulikuler',
+        ]);
+
+        Kategori::create([
+            'namakategorinilai' => 'Catatan',
         ]);
     }
 }

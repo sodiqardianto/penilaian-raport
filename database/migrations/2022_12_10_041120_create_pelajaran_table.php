@@ -15,7 +15,8 @@ class CreatePelajaranTable extends Migration
     {
         Schema::create('pelajaran', function (Blueprint $table) {
             $table->increments('id', 10);
-            $table->string('namamatapelajaran',50);
+            $table->string('namamatapelajaran', 50);
+            $table->enum('muatan', ['sikap', 'lokal', 'pelajaran', 'ekstrakulikuler']);
             $table->timestamps();
         });
     }
