@@ -19,6 +19,10 @@ Route::group(['middleware' => ['auth']], function () {
         return view('dashboard');
     })->name('dashboard');
 
+    Route::get('/eksport', function () {
+        return view('eksport');
+    })->name('eksport');
+
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashborad');
     Route::resource('users', App\Http\Controllers\UserController::class);
     Route::get('dataUser', [App\Http\Controllers\UserController::class, 'data'])->name('users.data');

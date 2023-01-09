@@ -36,7 +36,8 @@
                                             <th class="border-bottom-0">No</th>
                                             <th class="border-bottom-0">Nama</th>
                                             <th class="border-bottom-0">Username</th>
-                                            <th class="border-bottom-0">Emaiil</th>
+                                            <th class="border-bottom-0">Email</th>
+                                            <th class="border-bottom-0">Role</th>
                                             <th class="border-bottom-0">Status</th>
                                             <th class="border-bottom-0">Aksi</th>
                                         </tr>
@@ -85,6 +86,10 @@
             {
                 data: 'email',
                 name: 'email'
+            },
+            {
+                data: 'roles[0].name',
+                name: 'roles.name',
             },
             {
                 data: 'status',

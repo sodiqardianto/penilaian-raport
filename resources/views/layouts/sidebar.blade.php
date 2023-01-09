@@ -26,6 +26,12 @@
                         <span class="side-menu__label">Dashboard</span>
                     </a>
                 </li>
+                <li class="slide">
+                    <a class="side-menu__item @if (Request::segment(1) == 'dashboard' || Request::segment(1) == '' ) active @endif" data-bs-toggle="slide" href="{{ route('eksport') }}">
+                        <i class="side-menu__icon fe fe-home"></i>
+                        <span class="side-menu__label">Eskport</span>
+                    </a>
+                </li>
                 <li class="sub-category">
                     <h3>Management User</h3>
                 </li>

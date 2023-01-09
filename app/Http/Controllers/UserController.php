@@ -20,7 +20,7 @@ class UserController extends Controller
 
     public function data()
     {
-        $user = User::all();
+        $user = User::with('roles')->get();
         return DataTables::of($user)
             ->addIndexColumn()
             ->addColumn('action', function ($user) {
