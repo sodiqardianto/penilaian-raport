@@ -27,7 +27,7 @@
                         @csrf
                         @method('POST')
                         <input type="hidden" name="idraport" value={{$id}}>
-                        <input type="hidden" name="idpelajaran" value={{$pelajaran->id}}>
+                        <input type="hidden" name="idpelajaran" value={{$pelajaran->idpelajaran}}>
                         <div class="card">
                             <div class="card-body">
                                 <div class="form-group">

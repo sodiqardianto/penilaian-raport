@@ -132,6 +132,18 @@
                         </li>
                     </ul>
                 </li>
+                <li class="slide @if (Request::segment(1) == 'laporan' ) is-expanded @endif">
+                    <a class="side-menu__item @if (Request::segment(1) == 'laporan') active @endif" data-bs-toggle="slide" href="javascript:void(0)">
+                        <i class="side-menu__icon fe fe-book"></i>
+                        <span class="side-menu__label">Laporan</span>
+                        <i class="angle fe fe-chevron-right"></i>
+                    </a>
+                    <ul class="slide-menu">
+                        <li>
+                            <a href="{{ route('laporan.index') }}" class="slide-item @if (Request::segment(1) == 'laporan') active @endif"> Laporan</a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
             <div class="slide-right" id="slide-right">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24">

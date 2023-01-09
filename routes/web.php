@@ -80,6 +80,11 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('ekstrakulikuler', App\Http\Controllers\EkstrakulikulerController::class);
     Route::get('dataekstrakulikuler', [App\Http\Controllers\EkstrakulikulerController::class, 'data'])->name('ekstrakulikuler.data');
+
+    Route::resource('laporan', App\Http\Controllers\LaporanController::class);
+    Route::get('datalaporan', [App\Http\Controllers\LaporanController::class, 'data'])->name('laporan.data');
+    Route::get('datalaporanmurid/{id}', [App\Http\Controllers\LaporanController::class, 'datamurid'])->name('laporan.datamurid');
+    Route::get('export/{id}/{semester}', [App\Http\Controllers\LaporanController::class, 'export'])->name('laporan.export');
 }); 
 
 // Auth::routes();

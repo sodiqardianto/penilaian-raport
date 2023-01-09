@@ -27,7 +27,9 @@ class RaportController extends Controller
 
         $raport = Raport::rightjoin('kelasmurid', 'raport.idmurid', '=', 'kelasmurid.idmurid')
             ->select('raport.id', 'raport.idkategorinilai', 'raport.idsemester', 'raport.idpelajaran', 'raport.nilai', 'raport.deskripsi', 'kelasmurid.idkelas', 'kelasmurid.idmurid')
-            ->where('kelasmurid.idkelas', $id)->get();
+            ->where('kelasmurid.idkelas', $id)
+            ->wherein('idkategorinilai', [2, 3])
+            ->get();
         //dd($walikelas);
         return DataTables::of($raport)
             ->addIndexColumn()
@@ -195,6 +197,7 @@ class RaportController extends Controller
             $semester = Semester::where('tahun', '=', date('Y'))->where('semester', 2)->get();
         }
         $kategori = Kategori::wherein('id', [2, 3])->get();
+
         return view('raport.edit', compact('id', 'murid', 'pelajaran', 'semester', 'kategori'));
     }
 
