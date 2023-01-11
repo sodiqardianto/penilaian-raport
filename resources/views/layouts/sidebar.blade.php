@@ -26,12 +26,15 @@
                         <span class="side-menu__label">Dashboard</span>
                     </a>
                 </li>
-                <li class="slide">
+                {{-- <li class="slide">
                     <a class="side-menu__item @if (Request::segment(1) == 'dashboard' || Request::segment(1) == '' ) active @endif" data-bs-toggle="slide" href="{{ route('eksport') }}">
                         <i class="side-menu__icon fe fe-home"></i>
                         <span class="side-menu__label">Eskport</span>
                     </a>
-                </li>
+                </li> --}}
+                <?php 
+                if(Auth::user()->load('roles')->name == 'admin'){
+                ?>
                 <li class="sub-category">
                     <h3>Management User</h3>
                 </li>
@@ -111,6 +114,10 @@
                         
                     </ul>
                 </li>
+                <?php } ?>
+                <?php 
+                if(Auth::user()->load('roles')->name == 'admin'||Auth::user()->load('roles')->name == 'Guru'){
+                ?>
                 <li class="slide @if (Request::segment(1) == 'raport' || Request::segment(1) == 'absen' || Request::segment(1) == 'sikap'||Request::segment(1) == 'ekstrakulikuler') is-expanded @endif">
                     <a class="side-menu__item @if (Request::segment(1) == 'raport' || Request::segment(1) == 'absen'||Request::segment(1) == 'sikap'||Request::segment(1) == 'ekstrakulikuler') active @endif" data-bs-toggle="slide" href="javascript:void(0)">
                         <i class="side-menu__icon fe fe-slack"></i>
@@ -132,6 +139,7 @@
                         </li>
                     </ul>
                 </li>
+                <?php } ?>
                 <li class="slide @if (Request::segment(1) == 'laporan' ) is-expanded @endif">
                     <a class="side-menu__item @if (Request::segment(1) == 'laporan') active @endif" data-bs-toggle="slide" href="javascript:void(0)">
                         <i class="side-menu__icon fe fe-book"></i>

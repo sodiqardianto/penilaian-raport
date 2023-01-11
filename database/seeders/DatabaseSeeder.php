@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Pelajaran;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -23,6 +22,11 @@ class DatabaseSeeder extends Seeder
             PelajaranSeeder::class,
             SemesterSeeder::class,
             KategoriSeeder::class,
+            KelasSeeder::class,
+            WalikelasSeeder::class,
+            GurupelajaranSeeder::class,
+            KelasmuridSeeder::class,
+            KelaspelajaranSeeder::class,
         ]);
     }
 }

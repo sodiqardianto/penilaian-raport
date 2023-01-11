@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'Kelas')
+@section('title', 'Data Laporan')
 @section('content')
 <!--app-content open-->
 <div class="main-content app-content mt-0">

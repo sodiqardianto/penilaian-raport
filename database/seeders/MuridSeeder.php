@@ -14,6 +14,10 @@ class MuridSeeder extends Seeder
      */
     public function run()
     {
-        Murid::factory()->count(50)->create();
+        Murid::create([
+            'namamurid' => 'Paijo',
+            'notelp' => '089502394523',
+            'jeniskelamin' => '1',
+        ]);
     }
 }

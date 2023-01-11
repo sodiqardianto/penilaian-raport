@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Absen;
+use App\Models\Guru;
 use App\Models\Kelasmurid;
 use App\Models\Semester;
 use App\Models\Walikelas;
@@ -20,12 +21,18 @@ class AbsenController extends Controller
      */
     public function data()
     {
-        $user = Auth::user();
-        $id = $user->load('guru')->guru[0]->id;
-        $idkelas =  Walikelas::where('idguru', $id)->select('idkelas')->first();
-        $absen = Absen::rightjoin('kelasmurid', 'absen.idmurid', '=', 'kelasmurid.idmurid')
-            ->select('absen.id',  'absen.idsemester',  'absen.alpha', 'absen.sakit', 'absen.izin', 'kelasmurid.idkelas', 'kelasmurid.idmurid')
-            ->where('kelasmurid.idkelas', $idkelas->idkelas)->get();
+        if (Auth::user()->load('roles')->name == 'admin') {
+            $absen = Absen::join('kelasmurid', 'absen.idmurid', '=', 'kelasmurid.idmurid')
+                ->select('absen.id',  'absen.idsemester',  'absen.alpha', 'absen.sakit', 'absen.izin', 'kelasmurid.idkelas', 'kelasmurid.idmurid')
+                ->get();
+        } else {
+            $user = Auth::user();
+            $id = Guru::where('iduser', $user->id)->first();
+            $idkelas =  Walikelas::where('idguru', $id->id)->select('idkelas')->first();
+            $absen = Absen::join('kelasmurid', 'absen.idmurid', '=', 'kelasmurid.idmurid')
+                ->select('absen.id',  'absen.idsemester',  'absen.alpha', 'absen.sakit', 'absen.izin', 'kelasmurid.idkelas', 'kelasmurid.idmurid')
+                ->where('kelasmurid.idkelas', $idkelas->idkelas)->get();
+        }
         // dd($absen);
         return DataTables::of($absen)
             ->addIndexColumn()
@@ -66,10 +73,14 @@ class AbsenController extends Controller
      */
     public function create()
     {
-        $user = Auth::user();
-        $id = $user->load('guru')->guru[0]->id;
-        $idkelas =  Walikelas::where('idguru', $id)->select('idkelas')->first();
-        $murid = Kelasmurid::where('idkelas', '=', $idkelas->idkelas)->get();
+        if (Auth::user()->load('roles')->name != 'admin') {
+            $user = Auth::user();
+            $id = Guru::where('iduser', $user->id)->first();
+            $idkelas =  Walikelas::where('idguru', $id)->select('idkelas')->first();
+            $murid = Kelasmurid::where('idkelas', '=', $idkelas->idkelas)->get();
+        } else {
+            $murid = Kelasmurid::all();
+        }
         $currentMonth = Carbon::now()->month;
 
         if ($currentMonth >= 1 && $currentMonth <= 6) {

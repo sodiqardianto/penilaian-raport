@@ -56,6 +56,16 @@ class RolePermissionSeeder extends Seeder
             'guard_name' => 'web'
         ]);
 
+        $role_tu = Role::create([
+            'name' => 'tata usaha',
+            'guard_name' => 'web'
+        ]);
+
+        $role_guru = Role::create([
+            'name' => 'guru',
+            'guard_name' => 'web'
+        ]);
+
         $role_admin->givePermissionTo([
             'create-role',
             'view-role',

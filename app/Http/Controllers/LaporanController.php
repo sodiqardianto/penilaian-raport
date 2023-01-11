@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Absen;
+use App\Models\Guru;
 use App\Models\Kelasmurid;
 use App\Models\Murid;
 use App\Models\Pelajaran;
@@ -11,6 +12,7 @@ use App\Models\Semester;
 use App\Models\Walikelas;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 
 class LaporanController extends Controller
@@ -22,7 +24,13 @@ class LaporanController extends Controller
      */
     public function data()
     {
-        $kelas = Kelasmurid::select('idkelas')->groupBy('idkelas')->get();
+        if (Auth::user()->load('roles')->name == 'admin' || Auth::user()->load('roles')->name == 'Tata Usaha') {
+            $kelas = Kelasmurid::select('idkelas')->groupBy('idkelas')->get();
+        } else {
+            $user = Auth::user();
+            $id = Guru::where('iduser', $user->id)->first();
+            $kelas = Kelasmurid::join('walikelas', 'walikelas.idkelas', '=', 'kelasmurid.idkelas')->select('kelasmurid.idkelas')->where('walikelas.idguru', $id->id)->get();
+        }
         return DataTables::of($kelas)
             ->addIndexColumn()
             ->addColumn('kelas', function ($kelas) {
@@ -61,6 +69,7 @@ class LaporanController extends Controller
 
     public function index()
     {
+        dd(Auth::user()->load('roles')->name);
         return view('laporan.index');
     }
 

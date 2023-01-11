@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Guru;
+use App\Models\Walikelas;
 use Illuminate\Database\Seeder;
 
-class GuruSeeder extends Seeder
+class WalikelasSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,10 +14,9 @@ class GuruSeeder extends Seeder
      */
     public function run()
     {
-        Guru::create([
-            'namaguru' => 'Andi',
-            'notelp' => '089582394219',
-            'iduser' => '3'
+        Walikelas::create([
+            'idkelas' => 1,
+            'idguru' => 1
         ]);
     }
 }

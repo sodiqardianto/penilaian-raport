@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Guru;
 use App\Models\Gurupelajaran;
 use App\Models\Kategori;
 use App\Models\Kelasmurid;
@@ -77,18 +78,22 @@ class RaportController extends Controller
 
     public function datakelas()
     {
-        $user = Auth::user();
-        $id = $user->load('guru')->guru[0]->id;
-        $kelaspelajaran = Kelaspelajaran::join('gurupelajaran', 'kelaspelajaran.idgurupelajaran', '=', 'gurupelajaran.id')->where('gurupelajaran.idguru', '=', $id)->get();
+        if (Auth::user()->load('roles')->name == 'admin') {
+            $kelaspelajaran = Kelaspelajaran::join('gurupelajaran', 'kelaspelajaran.idgurupelajaran', '=', 'gurupelajaran.id')->get();
+        } else {
+            $user = Auth::user();
+            $id = Guru::where('iduser', $user->id)->first();
+            $kelaspelajaran = Kelaspelajaran::join('gurupelajaran', 'kelaspelajaran.idgurupelajaran', '=', 'gurupelajaran.id')->where('gurupelajaran.idguru', '=', $id->id)->get();
+        }
         //dd($walikelas);
         return DataTables::of($kelaspelajaran)
             ->addIndexColumn()
             ->addColumn('kelas', function ($kelaspelajaran) {
                 return $kelaspelajaran->kelas->kelas;
             })
-            ->addColumn('guru', function ($kelaspelajaran) {
-                return $kelaspelajaran->gurupelajaran->guru->namaguru;
-            })
+            // ->addColumn('guru', function ($kelaspelajaran) {
+            //     return $kelaspelajaran->gurupelajaran->guru->namaguru;
+            // })
             ->addColumn('pelajaran', function ($kelaspelajaran) {
                 return $kelaspelajaran->gurupelajaran->pelajaran->namamatapelajaran;
             })
