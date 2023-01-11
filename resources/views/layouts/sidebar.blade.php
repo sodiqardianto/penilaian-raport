@@ -2,11 +2,11 @@
     <div class="app-sidebar__overlay" data-bs-toggle="sidebar"></div>
     <div class="app-sidebar">
         <div class="side-header">
-            <a class="header-brand1" href="index.html">
-                <img src="{{ asset('assets/images/brand/logo.png') }}" class="header-brand-img desktop-logo" alt="logo">
-                <img src="{{ asset('assets/images/brand/logo-1.png') }}" class="header-brand-img toggle-logo"alt="logo">
-                <img src="{{ asset('assets/images/brand/logo-2.png') }}" class="header-brand-img light-logo" alt="logo">
-                <img src="{{ asset('assets/images/brand/logo-3.png') }}" class="header-brand-img light-logo1" alt="logo">
+            <a class="header-brand1" href="/">
+                <img src="{{ asset('assets/images/brand/logo-kumnamu.png') }}" class="header-brand-img desktop-logo" alt="logo">
+                <img src="{{ asset('assets/images/brand/kumnamu-logo.png') }}" class="header-brand-img toggle-logo"alt="logo">
+                <img src="{{ asset('assets/images/brand/kumnamu-logo.png') }}" class="header-brand-img light-logo" alt="logo">
+                <img src="{{ asset('assets/images/brand/logo-kumnamu.png') }}" class="header-brand-img light-logo1" alt="logo">
             </a>
             <!-- LOGO -->
         </div>
@@ -51,12 +51,12 @@
                         <li>
                             <a href="{{ route('users.index') }}" class="slide-item @if (Request::segment(1) == 'users') active @endif"> User</a>
                         </li>
-                        <li>
+                        {{-- <li>
                             <a href="{{ route('roles.index') }}" class="slide-item @if (Request::segment(1) == 'roles') active @endif"> Role</a>
                         </li>
                         <li>
                             <a href="{{ route('permissions.index') }}" class="slide-item @if (Request::segment(1) == 'permissions') active @endif"> Permission</a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </li>
                 <li class="sub-category">
@@ -86,10 +86,10 @@
                             <a href="{{ route('kelas.index') }}" class="slide-item @if (Request::segment(1) == 'kelas') active @endif"> Kelas</a>
 
                         </li>
-                        <li>
+                        {{-- <li>
                             <a href="{{ route('kategori.index') }}" class="slide-item @if (Request::segment(1) == 'kategori') active @endif"> Kategori</a>
 
-                        </li>
+                        </li> --}}
                     </ul>
                 </li>
                 <li class="slide @if (Request::segment(1) == 'walikelas' || Request::segment(1) == 'kelasmurid' || Request::segment(1) == 'gurupelajaran' || Request::segment(1) == 'kelaspelajaran') is-expanded @endif">

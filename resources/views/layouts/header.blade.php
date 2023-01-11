@@ -3,9 +3,9 @@
         <div class="d-flex">
             <a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-bs-toggle="sidebar" href="javascript:void(0)"></a>
             <!-- sidebar-toggle-->
-            <a class="logo-horizontal " href="index.html">
-                <img src="{{ asset('assets/images/brand/logo.png') }}" class="header-brand-img desktop-logo" alt="logo">
-                <img src="{{ asset('assets/images/brand/logo-3.png') }}" class="header-brand-img light-logo1"
+            <a class="logo-horizontal " href="/">
+                <img src="{{ asset('assets/images/brand/logo-kumnamu.png') }}" class="header-brand-img desktop-logo" alt="logo">
+                <img src="{{ asset('assets/images/brand/kumnamu-logo.png') }}" class="header-brand-img light-logo1"
                     alt="logo">
             </a>
             <div class="d-flex order-lg-2 ms-auto header-right-icons">
@@ -31,7 +31,7 @@
                                 </a>
                             </div>
                             <!-- FULL-SCREEN -->
-                            <div class="dropdown  d-flex notifications">
+                            {{-- <div class="dropdown  d-flex notifications">
                                 <a class="nav-link icon" data-bs-toggle="dropdown"><i
                                         class="fe fe-bell"></i><span class=" pulse"></span>
                                 </a>
@@ -88,12 +88,20 @@
                                         class="dropdown-item text-center p-3 text-muted">View all
                                         Notification</a>
                                 </div>
-                            </div>
+                            </div> --}}
                             <!-- NOTIFICATIONS -->
                             <div class="dropdown d-flex profile-1">
                                 <a href="javascript:void(0)" data-bs-toggle="dropdown" class="nav-link leading-none d-flex">
-                                    <img src="{{ asset('assets/images/users/21.jpg') }}" alt="profile-user"
-                                        class="avatar  profile-user brround cover-image">
+                                    <?php
+                                        if(Auth::user()->load('roles')->name == 'admin'){?>
+                                        <img src="{{ asset('assets/images/users/22.jpg') }}" alt="profile-user" class="avatar  profile-user brround cover-image">
+                                    <?php }else if(Auth::user()->load('roles')->name == 'Tata Usaha'){?>
+                                        <img src="{{ asset('assets/images/users/23.jpg') }}" alt="profile-user" class="avatar  profile-user brround cover-image">                                      
+                                    <?php }else{ ?>
+                                        <img src="{{ asset('assets/images/users/24.jpg') }}" alt="profile-user" class="avatar  profile-user brround cover-image">
+                                    <?php }
+                                        ?>
+                                    
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                     <div class="drop-heading">
@@ -103,9 +111,9 @@
                                         </div>
                                     </div>
                                     <div class="dropdown-divider m-0"></div>
-                                    <a class="dropdown-item" href="#">
+                                    {{-- <a class="dropdown-item" href="#">
                                         <i class="dropdown-icon fe fe-user"></i> Profile
-                                    </a>
+                                    </a> --}}
                                     {{-- <a class="dropdown-item" href="email-inbox.html">
                                         <i class="dropdown-icon fe fe-mail"></i> Inbox
                                         <span class="badge bg-danger rounded-pill float-end">5</span>

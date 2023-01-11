@@ -15,9 +15,7 @@ use Spatie\Permission\Models\Permission;
 */
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/eksport', function () {
         return view('eksport');

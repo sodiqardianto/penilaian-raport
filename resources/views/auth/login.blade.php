@@ -52,7 +52,7 @@
                 <!-- CONTAINER OPEN -->
                 <div class="col col-login mx-auto mt-7">
                     <div class="text-center">
-                        <img src="{{ asset('assets/images/brand/logo-white.png') }}" class="header-brand-img" alt="">
+                        
                     </div>
                 </div>
 
@@ -60,11 +60,14 @@
                     <div class="wrap-login100 p-6">
                         <form class="login100-form validate-form" method="POST" action="{{ route('login') }}">
                             @csrf
-                            <span class="login100-form-title pb-5">
+                            <center>    
+                                <img src="{{ asset('assets/images/brand/logo-kumnamu.png') }}" class="header-brand-img" alt="">
+                            </center>
+                            <span class="login100-form-title pt-4 pb-1">
                                 Login
                             </span>
                             <div class="panel panel-primary">
-                                <div class="panel-body tabs-menu-body p-0 pt-5">
+                                <div class="panel-body tabs-menu-body p-0 pt-2">
                                     <div class="tab-content">
                                         <div class="tab-pane active">
                                             <div class="form-group">
