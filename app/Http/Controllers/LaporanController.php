@@ -69,7 +69,6 @@ class LaporanController extends Controller
 
     public function index()
     {
-        dd(Auth::user()->load('roles')->name);
         return view('laporan.index');
     }
 

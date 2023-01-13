@@ -25,7 +25,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">
-                                <a href="{{ route('ekstrakulikuler.create') }}" class="btn btn-primary"><i class="fe fe-plus me-2"></i> Tambah Ekstrakulikuler</a>
+                                <a href="{{ route('ekstrakulikuler.create') }}" class="btn btn-primary"><i class="fe fe-plus me-2"></i> Tambah Data Ekstrakulikuler</a>
                             </h3>
                         </div>
                         <div class="card-body">

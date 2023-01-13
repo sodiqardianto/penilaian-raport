@@ -25,7 +25,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">
-                                <a href="{{ route('sikap.create') }}" class="btn btn-primary"><i class="fe fe-plus me-2"></i> Tambah Sikap dan Catatan</a>
+                                <a href="{{ route('sikap.create') }}" class="btn btn-primary"><i class="fe fe-plus me-2"></i> Tambah Data Sikap dan Catatan</a>
                             </h3>
                         </div>
                         <div class="card-body">

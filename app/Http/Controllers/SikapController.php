@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Guru;
 use App\Models\Raport;
 use App\Models\Kategori;
 use App\Models\Kelasmurid;
@@ -22,14 +23,22 @@ class SikapController extends Controller
      */
     public function data()
     {
-        $user = Auth::user();
-        $id = $user->load('guru')->guru[0]->id;
-        $idkelas =  Walikelas::where('idguru', $id)->select('idkelas')->first();
-        $sikap = Raport::join('kelasmurid', 'raport.idmurid', '=', 'kelasmurid.idmurid')
-            ->select('raport.id',  'raport.idsemester', 'raport.idpelajaran', 'raport.idkategorinilai', 'raport.deskripsi', 'kelasmurid.idkelas', 'kelasmurid.idmurid')
-            ->where('kelasmurid.idkelas', $idkelas->idkelas)
-            ->wherein('raport.idkategorinilai', [1, 5])
-            ->get();
+        if (Auth::user()->load('roles')->name == 'admin') {
+            $sikap = Raport::join('kelasmurid', 'raport.idmurid', '=', 'kelasmurid.idmurid')
+                ->select('raport.id',  'raport.idsemester', 'raport.idpelajaran', 'raport.idkategorinilai', 'raport.deskripsi', 'kelasmurid.idkelas', 'kelasmurid.idmurid')
+                // ->where('kelasmurid.idkelas', $idkelas->idkelas)
+                ->wherein('raport.idkategorinilai', [1, 5])
+                ->get();
+        } else {
+            $user = Auth::user();
+            $id = $user->load('guru')->guru[0]->id;
+            $idkelas =  Walikelas::where('idguru', $id)->select('idkelas')->first();
+            $sikap = Raport::join('kelasmurid', 'raport.idmurid', '=', 'kelasmurid.idmurid')
+                ->select('raport.id',  'raport.idsemester', 'raport.idpelajaran', 'raport.idkategorinilai', 'raport.deskripsi', 'kelasmurid.idkelas', 'kelasmurid.idmurid')
+                ->where('kelasmurid.idkelas', $idkelas->idkelas)
+                ->wherein('raport.idkategorinilai', [1, 5])
+                ->get();
+        }
         // dd($sikap);
         return DataTables::of($sikap)
             ->addIndexColumn()
@@ -83,10 +92,15 @@ class SikapController extends Controller
      */
     public function create()
     {
-        $user = Auth::user();
-        $id = $user->load('guru')->guru[0]->id;
-        $idkelas =  Walikelas::where('idguru', $id)->select('idkelas')->first();
-        $murid = Kelasmurid::where('idkelas', '=', $idkelas->idkelas)->get();
+
+        if (Auth::user()->load('roles')->name == 'admin') {
+            $murid = Kelasmurid::all();
+        } else {
+            $user = Auth::user();
+            $id = Guru::where('iduser', $user->id)->first();
+            $idkelas =  Walikelas::where('idguru', $id)->select('idkelas')->first();
+            $murid = Kelasmurid::where('idkelas', '=', $idkelas->idkelas)->get();
+        }
         $kategori = Kategori::wherein('id', [1, 5])->get();
         $muatan = Pelajaran::wherein('id', [1, 2])->get();
         $currentMonth = Carbon::now()->month;

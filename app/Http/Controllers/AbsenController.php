@@ -42,7 +42,7 @@ class AbsenController extends Controller
             })
             ->addColumn('semesterstr', function ($absen) {
                 if ($absen->idsemester != null) {
-                    return $absen->semester->semester;
+                    return $absen->semester->semester == 1 ? 'Ganjil ' . $absen->semester->tahun : 'Genap ' . $absen->semester->tahun;
                 } else {
                     return '';
                 }
@@ -90,7 +90,7 @@ class AbsenController extends Controller
             $semester = Semester::where('tahun', '=', date('Y'))->where('semester', 2)->get();
         }
 
-        return view('absen.create', compact('id', 'murid', 'semester'));
+        return view('absen.create', compact('murid', 'semester'));
     }
 
     /**
