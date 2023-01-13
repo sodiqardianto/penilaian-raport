@@ -153,12 +153,20 @@ table.table-bordered > tbody > tr > td{
                         <tr>
                             <td>Kelas</td>
                             <td>:</td>
-                            <td>{{$muridkelas->kelas}} ( LIMA)</td>
+                            <td>{{$muridkelas->kelas}} (<?php 
+                            if($muridkelas->kelas==1){
+                                echo 'SATU';
+                            }else if($muridkelas->kelas==2){
+                                echo 'DUA';
+                            }else{
+                                echo 'TIGA';
+                            }
+                            ?>)</td>
                         </tr>
                         <tr>
                             <td>Semester</td>
                             <td>:</td>
-                            <td>{{$semester->semester==1?'Ganjil':'Genap'}} {{$semester->tahun}}</td>
+                            <td> {{$semester->semester}} ({{$semester->semester==1?'SATU':'DUA'}})</td>
                         </tr>
                         <tr>
                             <td>Tahun Pelajaran</td>

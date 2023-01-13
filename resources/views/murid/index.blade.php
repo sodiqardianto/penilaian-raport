@@ -35,6 +35,8 @@
                                         <tr>
                                             <th class="border-bottom-0">No</th>
                                             <th class="border-bottom-0">Nama Murid</th>
+                                            <th class="border-bottom-0">Nomor Induk Siswa</th>
+                                            <th class="border-bottom-0">Nomor Induk Siswa Nasional</th>
                                             <th class="border-bottom-0">No Telepon</th>
                                             <th class="border-bottom-0">Jenis Kelamin</th>
                                             {{-- <th class="border-bottom-0">Status</th> --}}
@@ -77,6 +79,14 @@
             {
                 data: 'namamurid',
                 name: 'namamurid'
+            },
+            {
+                data: 'nis',
+                name: 'nis'
+            },
+            {
+                data: 'nisn',
+                name: 'nisn'
             },
             {
                 data: 'notelp',

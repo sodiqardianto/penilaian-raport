@@ -14,6 +14,8 @@ class Murid extends Model
         'namamurid',
         'notelp',
         'jeniskelamin',
+        'nis',
+        'nisn',
     ];
 
     // Menentukan nama table yang digunakan
@@ -36,5 +38,4 @@ class Murid extends Model
     {
         return $this->hasMany('App\Raport');
     }
-
 }

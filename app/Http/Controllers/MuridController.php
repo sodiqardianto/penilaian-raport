@@ -72,13 +72,17 @@ class MuridController extends Controller
         // dd($request);
         $this->validate($request, array(
             'name' => 'required',
-            'notelp' => 'required'
+            'notelp' => 'required',
+            'nis' => 'required',
+            'nisn' => 'required'
         ));
 
         $murid = Murid::create([
             'namamurid' => $request->name,
             'notelp' => $request->notelp,
-            'jeniskelamin' => $request->jk
+            'jeniskelamin' => $request->jk,
+            'nis' => $request->nis,
+            'nisn' => $request->notelp,
         ]);
 
         if ($murid) {
@@ -122,13 +126,18 @@ class MuridController extends Controller
         $validatedData = $request->validate([
             'name' => 'required',
             'notelp' => 'required',
-            'jk' => 'required'
+            'jk' => 'required',
+            'nis' => 'required',
+            'nisn' => 'required'
         ]);
 
         $data = Murid::findOrFail($murid->id);
         $data->namamurid = $validatedData['name'];
         $data->notelp = $validatedData['notelp'];
         $data->jeniskelamin = $validatedData['jk'];
+        $data->nis = $validatedData['nis'];
+        $data->nisn = $validatedData['nisn'];
+
         $data->save();
 
         if ($data) {

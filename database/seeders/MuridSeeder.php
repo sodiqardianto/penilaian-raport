@@ -18,6 +18,8 @@ class MuridSeeder extends Seeder
             'namamurid' => 'Paijo',
             'notelp' => '089502394523',
             'jeniskelamin' => '1',
+            'nis' => '2023.5.001',
+            'nisn' => '0109023940',
         ]);
     }
 }

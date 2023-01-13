@@ -35,6 +35,20 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
+                                    <label class="form-label">Nomor Induk Siswa</label>
+                                    <input type="text" name="nis" class="form-control @error('nis') is-invalid state-invalid @enderror" placeholder="Nomor Induk Siswa" value="{{ old('nis') }}" autofocus>
+                                    @error('nis')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Nomor Induk Siswa Nasional</label>
+                                    <input type="text" name="nisn" class="form-control @error('nisn') is-invalid state-invalid @enderror" placeholder="Nomor Induk Siswa Nasional" value="{{ old('nisn') }}" autofocus>
+                                    @error('nisn')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
                                     <label class="form-label">No Telepon</label>
                                     <input type="number" name="notelp" class="form-control @error('notelp') is-invalid state-invalid @enderror" placeholder="No Telepon" value="{{ old('notelp') }}" autofocus>
                                     @error('notelp')

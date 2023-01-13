@@ -15,9 +15,11 @@ class CreateMuridTable extends Migration
     {
         Schema::create('murid', function (Blueprint $table) {
             $table->increments('id', 10);
-            $table->string('namamurid',30);
-            $table->string('notelp',13);
-            $table->enum('jeniskelamin',['0','1']);
+            $table->string('namamurid', 30);
+            $table->string('notelp', 13);
+            $table->enum('jeniskelamin', ['0', '1']);
+            $table->string('nis', 13);
+            $table->string('nisn', 13);
             $table->timestamps();
         });
     }
