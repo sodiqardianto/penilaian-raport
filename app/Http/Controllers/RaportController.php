@@ -25,7 +25,6 @@ class RaportController extends Controller
      */
     public function data($id)
     {
-
         $raport = Raport::rightjoin('kelasmurid', 'raport.idmurid', '=', 'kelasmurid.idmurid')
             ->select('raport.id', 'raport.idkategorinilai', 'raport.idsemester', 'raport.idpelajaran', 'raport.nilai', 'raport.deskripsi', 'kelasmurid.idkelas', 'kelasmurid.idmurid')
             ->where('kelasmurid.idkelas', $id)
@@ -78,7 +77,7 @@ class RaportController extends Controller
 
     public function datakelas()
     {
-        if (Auth::user()->load('roles')->name == 'admin') {
+        if (Auth::user()->load('roles')->roles[0]->name == 'admin') {
             $kelaspelajaran = Kelaspelajaran::join('gurupelajaran', 'kelaspelajaran.idgurupelajaran', '=', 'gurupelajaran.id')->get();
         } else {
             $user = Auth::user();
@@ -99,7 +98,7 @@ class RaportController extends Controller
             })
             ->addColumn('action', function ($kelaspelajaran) {
 
-                $edit = '<a href="' . route('raport.kelas', $kelaspelajaran->id) . '" class="btn btn-sm btn-success"><i class="glyphicon glyphicon-edit"></i> Masuk</a>';
+                $edit = '<a href="' . route('raport.kelas', $kelaspelajaran->idkelas) . '" class="btn btn-sm btn-success"><i class="glyphicon glyphicon-edit"></i> Masuk</a>';
                 return $edit;
             })
             ->make(true);
@@ -191,6 +190,7 @@ class RaportController extends Controller
      */
     public function edit($id)
     {
+
         $murid = Kelasmurid::where('idkelas', '=', $id)->get();
         $pelajaran = Gurupelajaran::where('idguru', '=', auth::user()->load('guru')->guru[0]->id)->first();
         $currentMonth = Carbon::now()->month;

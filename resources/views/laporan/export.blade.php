@@ -100,7 +100,7 @@ table.table-bordered > tbody > tr > td{
                 <div class="row">
                     <div class="col-lg-2 gambar">
                         <a class="header-brand" href="">
-                            <img src="../assets/images/brand/kumnamu-logo.png" class="header-brand-img logo-3" alt="Kumnamu logo">
+                            <img src="{{asset('assets/images/brand/kumnamu-logo.png')}}" class="header-brand-img logo-3" alt="Kumnamu logo">
                         </a>
                     </div>
                     <div class="col-lg-10 text-end border-bottom border-lg-0 tengah">
@@ -124,12 +124,12 @@ table.table-bordered > tbody > tr > td{
                         <tr>
                             <td>Nomor Induk Siswa</td>
                             <td class="px-2">:</td>
-                            <td>1522489387</td>
+                            <td>{{$murid->nis}}</td>
                         </tr>
                         <tr>
                             <td>Nomor Induk Siswa Nasional</td>
                             <td class="px-2">:</td>
-                            <td>15224893871</td>
+                            <td>{{$murid->nisn}}</td>
                         </tr>
                         <tr>
                             <td>Kecamatan</td>

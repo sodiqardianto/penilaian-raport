@@ -33,7 +33,7 @@
                     </a>
                 </li> --}}
                 <?php 
-                if(Auth::user()->load('roles')->name == 'admin'){
+                if(Auth::user()->load('roles')->roles[0]->name == 'admin'){
                 ?>
                 <li class="sub-category">
                     <h3>Management User</h3>
@@ -115,8 +115,18 @@
                     </ul>
                 </li>
                 <?php } ?>
+
                 <?php 
-                if(Auth::user()->load('roles')->name == 'admin'||Auth::user()->load('roles')->name == 'Guru'){
+                
+                $idguru = App\Models\Guru::where('iduser',Auth::user()->id)->first();
+                $count = 0;
+                if ($idguru != null) {
+                    $count = App\Models\Walikelas::where('idguru',$idguru->id)->count(); 
+                }else{
+                    $count == 0;
+                }
+
+                if(Auth::user()->load('roles')->roles[0]->name == 'admin'||Auth::user()->load('roles')->roles[0]->name == 'guru'){
                 ?>
                 <li class="slide @if (Request::segment(1) == 'raport' || Request::segment(1) == 'absen' || Request::segment(1) == 'sikap'||Request::segment(1) == 'ekstrakulikuler') is-expanded @endif">
                     <a class="side-menu__item @if (Request::segment(1) == 'raport' || Request::segment(1) == 'absen'||Request::segment(1) == 'sikap'||Request::segment(1) == 'ekstrakulikuler') active @endif" data-bs-toggle="slide" href="javascript:void(0)">
@@ -128,6 +138,9 @@
                         <li>
                             <a href="{{ route('raport.index') }}" class="slide-item @if (Request::segment(1) == 'raport') active @endif"> Raport</a>
                         </li>
+                        <?php 
+                        if($count > 0 or Auth::user()->load('roles')->roles[0]->name == 'admin'){
+                        ?>
                         <li>
                             <a href="{{ route('absen.index') }}" class="slide-item @if (Request::segment(1) == 'absen') active @endif"> Absen</a>
                         </li>
@@ -137,9 +150,12 @@
                         <li>
                             <a href="{{ route('ekstrakulikuler.index') }}" class="slide-item @if (Request::segment(1) == 'ekstrakulikuler') active @endif"> Penilaian Ekstrakulikuler</a>
                         </li>
+                        <?php } ?>
                     </ul>
                 </li>
-                <?php } ?>
+                <?php } 
+                if($count > 0 || Auth::user()->load('roles')->roles[0]->name == 'admin' ||Auth::user()->load('roles')->roles[0]->name == 'tata usaha'){
+                ?>
                 <li class="slide @if (Request::segment(1) == 'laporan' ) is-expanded @endif">
                     <a class="side-menu__item @if (Request::segment(1) == 'laporan') active @endif" data-bs-toggle="slide" href="javascript:void(0)">
                         <i class="side-menu__icon fe fe-book"></i>
@@ -152,6 +168,7 @@
                         </li>
                     </ul>
                 </li>
+                <?php } ?>
             </ul>
             <div class="slide-right" id="slide-right">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24">

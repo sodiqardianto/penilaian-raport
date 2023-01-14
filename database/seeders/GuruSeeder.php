@@ -19,5 +19,11 @@ class GuruSeeder extends Seeder
             'notelp' => '089582394219',
             'iduser' => '3'
         ]);
+
+        Guru::create([
+            'namaguru' => 'Ardi',
+            'notelp' => '089672838481',
+            'iduser' => '4'
+        ]);
     }
 }

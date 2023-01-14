@@ -17,5 +17,6 @@ class KelaspelajaranSeeder extends Seeder
         Kelaspelajaran::create(['idkelas' => 1, 'idgurupelajaran' => 1]);
         Kelaspelajaran::create(['idkelas' => 1, 'idgurupelajaran' => 2]);
         Kelaspelajaran::create(['idkelas' => 1, 'idgurupelajaran' => 3]);
+        Kelaspelajaran::create(['idkelas' => 1, 'idgurupelajaran' => 4]);
     }
 }

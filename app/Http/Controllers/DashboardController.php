@@ -6,6 +6,7 @@ use App\Models\Guru;
 use App\Models\Murid;
 use App\Models\Pelajaran;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
