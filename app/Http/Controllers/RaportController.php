@@ -8,6 +8,7 @@ use App\Models\Kategori;
 use App\Models\Kelasmurid;
 use App\Models\Kelaspelajaran;
 use App\Models\Murid;
+use App\Models\Pelajaran;
 use App\Models\Raport;
 use App\Models\Semester;
 use App\Models\User;
@@ -25,11 +26,19 @@ class RaportController extends Controller
      */
     public function data($id)
     {
-        $raport = Raport::rightjoin('kelasmurid', 'raport.idmurid', '=', 'kelasmurid.idmurid')
-            ->select('raport.id', 'raport.idkategorinilai', 'raport.idsemester', 'raport.idpelajaran', 'raport.nilai', 'raport.deskripsi', 'kelasmurid.idkelas', 'kelasmurid.idmurid')
-            ->where('kelasmurid.idkelas', $id)
-            ->wherein('idkategorinilai', [2, 3])
-            ->get();
+        if (Auth::user()->load('roles')->roles[0]->name == 'admin') {
+            $raport = Raport::rightjoin('kelasmurid', 'raport.idmurid', '=', 'kelasmurid.idmurid')
+                ->select('raport.id', 'raport.idkategorinilai', 'raport.idsemester', 'raport.idpelajaran', 'raport.nilai', 'raport.deskripsi', 'kelasmurid.idkelas', 'kelasmurid.idmurid')
+                ->where('kelasmurid.idkelas', $id)
+                ->wherein('idkategorinilai', [2, 3])
+                ->get();
+        } else {
+            $raport = Raport::rightjoin('kelasmurid', 'raport.idmurid', '=', 'kelasmurid.idmurid')
+                ->select('raport.id', 'raport.idkategorinilai', 'raport.idsemester', 'raport.idpelajaran', 'raport.nilai', 'raport.deskripsi', 'kelasmurid.idkelas', 'kelasmurid.idmurid')
+                ->wherein('idkategorinilai', [2, 3])
+                ->get();
+        }
+
         //dd($walikelas);
         return DataTables::of($raport)
             ->addIndexColumn()
@@ -106,14 +115,16 @@ class RaportController extends Controller
 
     public function index()
     {
-        return view('raport.kelas');
+        if (Auth::user()->load('roles')->roles[0]->name == 'admin') {
+            $id = 0;
+            return view('raport.index', compact('id'));
+        } else {
+            return view('raport.kelas');
+        }
     }
 
     public function kelasreport($id)
     {
-        $user = Auth::user();
-        $role = $user->role;
-        //dd($role);
         return view('raport.index', compact('id'));
     }
     /**
@@ -190,7 +201,7 @@ class RaportController extends Controller
      */
     public function edit($id)
     {
-
+        $pelajarandata = Pelajaran::where('muatan', 'pelajaran')->where('muatan', 'lokal')->get();
         $murid = Kelasmurid::where('idkelas', '=', $id)->get();
         $pelajaran = Gurupelajaran::where('idguru', '=', auth::user()->load('guru')->guru[0]->id)->first();
         $currentMonth = Carbon::now()->month;
@@ -203,7 +214,7 @@ class RaportController extends Controller
         }
         $kategori = Kategori::wherein('id', [2, 3])->get();
 
-        return view('raport.edit', compact('id', 'murid', 'pelajaran', 'semester', 'kategori'));
+        return view('raport.edit', compact('id', 'murid', 'pelajaran', 'semester', 'kategori', 'pelajarandata'));
     }
 
     /**

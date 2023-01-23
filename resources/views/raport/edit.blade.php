@@ -27,7 +27,24 @@
                         @csrf
                         @method('POST')
                         <input type="hidden" name="idraport" value={{$id}}>
-                        <input type="hidden" name="idpelajaran" value={{$pelajaran->idpelajaran}}>
+                        @if (Auth::user()->load('roles')->roles[0]->name=='admin')
+                        <div class="form-group">
+                            <label class="form-label">Murid</label>
+                            <select name="idpelajaran" class="form-control form-select select2 select2-hidden-accessible @error('idpelajaran') is-invalid state-invalid @enderror" data-bs-placeholder="Pilih Kelas" tabindex="-1" aria-hidden="true">
+                                @foreach ($pelajarandata as $item)
+                                <option value="{{$item->id}}">{{$item->namamatapelajaran}}</option> 
+                                @endforeach
+                               
+                            </select> 
+                            @error('idpelajaran')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    
+                        @else
+                        <input type="hidden" name="idpelajaran" value={{$pelajaran->idpelajaran}}>    
+                        @endif
+                        
                         <div class="card">
                             <div class="card-body">
                                 <div class="form-group">

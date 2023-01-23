@@ -35,9 +35,9 @@
                                         <tr>
                                             <th class="border-bottom-0">No</th>
                                             <th class="border-bottom-0">Nama Murid</th>
+                                            <th class="border-bottom-0">Pelajaran</th>
                                             <th class="border-bottom-0">Nilai</th>
                                             <th class="border-bottom-0">Deskripsi</th>
-                                            {{-- <th class="border-bottom-0">Jenis Kelamin</th> --}}
                                             {{-- <th class="border-bottom-0">Status</th> --}}
                                             <th class="border-bottom-0">Aksi</th>
                                         </tr>
@@ -78,6 +78,10 @@
             {
                 data: 'murid',
                 name: 'murid'
+            },
+            {
+                data: 'pelajaran',
+                name: 'pelajaran'
             },
             {
                 data: 'nilai',
