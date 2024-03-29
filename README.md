@@ -48,3 +48,12 @@ php artisan migrate:fresh --seed
 ```sh
 php artisan serve
 ```
+
+## Screen capture
+
+![App Screenshot](https://raw.githubusercontent.com/sodiqardianto/penilaian-raport/main/public/image/pic-1.png)
+
+![App Screenshot](https://raw.githubusercontent.com/sodiqardianto/penilaian-raport/main/public/image/pic-2.png)
+
+![App Screenshot](https://raw.githubusercontent.com/sodiqardianto/penilaian-raport/main/public/image/pic-3.png)
+
