@@ -71,13 +71,20 @@ class SemesterController extends Controller
      */
     public function store(Request $request)
     {
-        // Validasi data yang dikirim
+        // CEK VALIDASI APAKAH DATA SEMESTER DAN TAHUN SUDAH ADA
+        $cek = Semester::where('semester', $request->semester)->where('tahun', $request->tahun)->first();
+
+        $gage = $request->semester = 1 ? 'Ganjil' : 'Genap';
+
+        if ($cek) {
+            return redirect()->route('semester.create')->with('error', 'Data semester ' . $gage . ' dan tahun ' . $request->tahun . ' sudah ada');
+        }
+
         $this->validate($request, [
             'semester' => 'required',
             'tahun' => 'required',
         ]);
 
-        // Membuat record baru di table semester
         $data = Semester::create([
             'semester' => $request->semester,
             'tahun' => $request->tahun,

@@ -58,7 +58,7 @@ class GuruController extends Controller
      */
     public function create()
     {
-        $user = User::all();
+        $user = User::where('username', 'like', '%guru%')->get();
         return view('guru.create', compact('user'));
     }
 

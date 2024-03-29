@@ -25,11 +25,12 @@ class UserController extends Controller
             ->addIndexColumn()
             ->addColumn('action', function ($user) {
                 if ($user->id == 1) {
-                    $delete = '<button data-id="' . $user->id . '" class="btn btn-danger btn-sm delete" hidden><i class="fa fa-trash"></i> Delete</button>';
+                    $edit = '';
+                    $delete = '';
                 } else {
                     $delete = '<button data-id="' . $user->id . '" class="btn btn-danger btn-sm delete"><i class="fa fa-trash"></i> Delete</button>';
+                    $edit = '<a href="' . route('users.edit', $user->id) . '" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i> Ubah</a>';
                 }
-                $edit = '<a href="' . route('users.edit', $user->id) . '" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i> Ubah</a>';
                 return $edit . ' ' . $delete;
             })->make(true);
     }
